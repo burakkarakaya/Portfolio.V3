@@ -1,5 +1,5 @@
 
-const sections = [
+export const CONFIG_SECTIONS = [
 
     {
         key: 'projects',
@@ -17,7 +17,7 @@ const sections = [
             fill: '#ffffff',
             width: '580.205',
             height: '144.304',
-            source: '/assets/svg/projects/',
+            source: '/assets/svg/sections/projects/',
             letters: [
                 {
                     key: 'p',
@@ -79,7 +79,7 @@ const sections = [
             fill: '#ffffff',
             width: '504.605',
             height: '110.702',
-            source: '/assets/svg/awards/',
+            source: '/assets/svg/sections/awards/',
             letters: [
                 {
                     key: 'A-',
@@ -130,7 +130,7 @@ const sections = [
             fill: '#ffffff',
             width: '333.026',
             height: '111.903',
-            source: '/assets/svg/skills/',
+            source: '/assets/svg/sections/skills/',
             letters: [
                 {
                     key: 'S-',
@@ -181,7 +181,7 @@ const sections = [
             fill: '#ffffff',
             width: '504.605',
             height: '110.702',
-            source: '/assets/svg/contact/',
+            source: '/assets/svg/sections/contact/',
             letters: [
                 {
                     key: 'C-',

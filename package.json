@@ -1,0 +1,27 @@
+{
+  "name": "portfolio.v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burakkarakaya/Portfolio.V3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/burakkarakaya/Portfolio.V3/issues"
+  },
+  "homepage": "https://github.com/burakkarakaya/Portfolio.V3#readme",
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "parcel-bundler": "^1.12.5"
+  }
+}

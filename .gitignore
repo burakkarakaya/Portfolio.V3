@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.log
+*.tmp
+*.lock
+
+# Özel IDE ve editör dosyaları
+.vscode/
+.idea/
+.cache/
+
+# Sisteme özgü dosyalar ve klasörler
+Thumbs.db
+.DS_Store

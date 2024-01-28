@@ -1,0 +1,17 @@
+Project Planing
+
++ Parcel.js Integration
+- Section Config file created
+- assets import
+- Layer Template Management
+- Gsap Integration
+- Layer animation
+- Matter Js Integration
+- Letter Animation
+- Content Config file created
+- Content Template Managent
+- Content Animation
+- Project Page Content create
+- Awards Page Content create
+- Skills Page Content create
+- Contact Page Content create
