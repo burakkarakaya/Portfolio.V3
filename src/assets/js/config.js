@@ -1,5 +1,4 @@
-
-export const CONFIG_SECTIONS = [
+const config = [
 
     {
         key: 'projects',
@@ -57,6 +56,40 @@ export const CONFIG_SECTIONS = [
                 {
                     key: 's',
                     path: 'M 527.7 84.152 L 517.5 86.702 A 14.896 14.896 0 0 0 517.498 86.935 C 517.498 95.401 524.649 107.424 542.266 110.142 A 50.057 50.057 0 0 0 549.9 110.702 A 45.563 45.563 0 0 0 560.42 109.56 C 573.87 106.369 579.892 96.98 580.19 87.591 A 23.175 23.175 0 0 0 580.2 87.152 A 23.581 23.581 0 0 0 580.202 86.82 C 580.202 77.964 575.197 69.476 563.801 65.854 A 38.292 38.292 0 0 0 556.65 64.352 L 540.75 62.552 C 534.45 61.802 530.55 58.202 530.55 52.502 A 7.162 7.162 0 0 1 530.786 50.705 C 532.127 45.529 539.103 40.352 549.45 40.352 A 25.856 25.856 0 0 1 554.462 40.81 C 564.088 42.711 566.631 50.118 567.15 55.052 L 576.75 53.102 A 15.27 15.27 0 0 0 576.525 50.621 C 575.383 43.801 569.475 31.652 549.45 31.652 A 41.852 41.852 0 0 0 539.915 32.695 C 527.38 35.624 520.97 44.188 520.265 51.467 A 13.86 13.86 0 0 0 520.2 52.802 A 21.667 21.667 0 0 0 521.224 59.566 C 523.996 68.053 531.858 72.024 538.05 72.752 L 553.8 74.552 A 33.251 33.251 0 0 1 562.046 76.334 C 565.672 77.735 568.375 80.077 569.164 84.12 A 13.461 13.461 0 0 1 569.4 86.702 A 12.495 12.495 0 0 1 561.922 98.497 C 558.843 100.001 554.888 100.802 550.2 100.802 C 536.628 100.802 529.571 94.162 527.999 86.377 A 17.224 17.224 0 0 1 527.7 84.152 Z'
+                }
+
+            ]
+        },
+        content: {
+            type: 'list',
+            data: [
+
+                {
+
+
+                    year: 2016,
+
+                    name: 'Nike Geç kendini',
+
+                    link: 'http://nike.lidyana.com',
+
+                    client: 'lidyana',
+
+                    agency: 'minus99',
+
+                    media: '',
+
+                    awwards: [
+
+                        {
+                            ico: 'awwwards',
+                            link: 'www.awwards.com/nikelidyana.com',
+                            title: 'Site of the day'
+                        }
+
+                    ]
+
+
                 }
 
             ]
@@ -179,8 +212,8 @@ export const CONFIG_SECTIONS = [
         },
         svg: {
             fill: '#ffffff',
-            width: '504.605',
-            height: '110.702',
+            width: '551.257',
+            height: '112.806',
             source: '/assets/svg/sections/contact/',
             letters: [
                 {
@@ -225,38 +258,4 @@ export const CONFIG_SECTIONS = [
 
 ];
 
-
-
-
-var projects = [
-
-    {
-
-
-        year: 2016,
-
-        name: 'Nike Geç kendini',
-
-        link: 'http://nike.lidyana.com',
-
-        client: 'lidyana',
-
-        agency: 'minus99',
-
-        media: '',
-
-        awwards: [
-
-            {
-                ico: 'awwwards',
-                link: 'www.awwards.com/nikelidyana.com',
-                title: 'Site of the day'
-            }
-
-        ]
-
-
-    }
-
-];
-
+export default config;

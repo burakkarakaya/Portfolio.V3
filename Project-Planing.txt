@@ -1,8 +1,9 @@
 Project Planing
 
 + Parcel.js Integration
-- Section Config file created
-- assets import
++ Section Config file created
++ assets import
++ sass yapısı oluşturuldu
 - Layer Template Management
 - Gsap Integration
 - Layer animation
