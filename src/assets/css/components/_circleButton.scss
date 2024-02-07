@@ -1,0 +1,23 @@
+main{
+    > button{
+        all: unset;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10;
+
+        i{
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: $white;
+            display: inline-block;
+        }
+
+        span {
+            font-size: 20px;
+            color: $white;
+            padding-left: 10px;
+        }
+
+    }
+}

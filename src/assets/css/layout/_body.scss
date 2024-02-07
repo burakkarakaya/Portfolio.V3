@@ -1,11 +1,27 @@
-$primary-color: #3498db;
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ecf0f1;
-    color: #333;
-}
-
-h1 {
-    color: $primary-color;
-}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: technique, helvetica, arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    font-weight: 100;
+    font-style: normal;
+    text-align: left;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    vertical-align: baseline;
+    text-decoration: none;
+    list-style: none;
+  }
+  
+  html,
+  body {
+    overflow: hidden;
+    width: 100vh;
+    height: 100vh;
+    background: #000000;
+  }

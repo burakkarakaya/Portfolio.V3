@@ -1,10 +1,28 @@
 import config from '@root/config';
-import Section from '@root/templates/section';
 
-const sections = config.map(obj=>{
-    var section = new Section(obj);
-    return section.generate();
-}).join('');
+import { Events, EVENT_TYPES } from '@root/events';
+import TemplateManagement from '@root/templates/template';
+import LayerManagement from '@root/components/layerManagement';
 
-document.querySelector('main').innerHTML = sections;
-console.log('hello world', sections);
+new TemplateManagement({ ID: document.querySelector('main'), options: config }).init();
+
+const layerManagement = new LayerManagement(config);
+
+new Events((obj) => {
+
+    switch (obj.type) {
+        case EVENT_TYPES.RESIZE:
+            layerManagement.adjust();
+            break;
+
+        case EVENT_TYPES.MOUSE_MOVE:
+            layerManagement.mouseMove(obj.evt);
+            break;
+        default:
+            break;
+    }
+}).init();
+
+setTimeout(() => {
+    layerManagement.activeted = true;
+}, 2000);

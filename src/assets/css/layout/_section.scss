@@ -1,0 +1,144 @@
+@use '../base/utilities' as utils;
+
+@mixin sectionColor($sectionName, $fillColor){
+    &[rel="#{$sectionName}"]{
+        section{
+            svg{
+                fill: $fillColor;
+                path{
+                    fill: $fillColor;
+                }
+            }
+        }
+        section[rel="#{$sectionName}"]{
+            background: $fillColor;
+            i{
+                background: $fillColor;
+            }
+
+            svg{
+                fill: $white;
+                path{
+                    fill: $white;
+                }
+            }
+        }
+    }
+}
+
+main {
+    section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #444444;
+        will-change: clip-path;
+
+        svg.letters {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 90%;
+            max-width: 79%;
+            height: auto;
+            pointer-events: none;
+            transform: translate3d(0, -50%, 0);
+            z-index: 2;
+            fill: $white;
+            transition: all .2s ease-in;
+
+            path{
+                fill: $white;
+                transition: all .2s ease-in;
+            }
+        }
+
+        i {
+            content: '';
+            position: fixed;
+            z-index: -1 !important;
+            top: 1px;
+            left: 1px;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            background: $black;
+        }
+
+        &[rel="projects"] {
+            @include utils.clipPath(55%, 2);
+            > i{
+                @include utils.clipPath(55%, 2);
+            }
+            svg.letters {
+                transform: translate3d(0, -38%, 0);
+            }
+        }
+
+        &[rel="awards"] {
+            @include utils.clipPath(44%, 3);
+            > i{
+                @include utils.clipPath(44%, 3);
+            }
+            svg.letters {
+                max-width: 68%;
+                transform: translate3d(0, -49%, 0);
+            }
+        }
+
+        &[rel="skills"] {
+            @include utils.clipPath(33%, 4);
+
+            > i{
+                @include utils.clipPath(33%, 4);
+            }
+
+            svg.letters {
+                max-width: 45%;
+                transform: translate3d(0, -50%, 0);
+            }
+        }
+
+        &[rel="contact"] {
+            @include utils.clipPath(22%, 5);
+
+            > i{
+                @include utils.clipPath(22%, 5);
+            }
+
+            svg.letters {
+                max-width: 73%;
+                transform: translate3d(0, -49%, 0);
+            }
+        }
+
+        &.is-active{
+            @include utils.clipPath(200%, 100);
+            transition: clip-path ease-out 500ms;
+            i {
+                @include utils.clipPath(200%, 100);
+                transition: clip-path ease-out 500ms;
+            }
+        }
+
+        &.de-active{
+            display: none;
+            i {
+                display: none;
+            }
+        }
+
+    }
+
+    @include sectionColor("projects", $project-color);
+
+    @include sectionColor("awards", $awards-color);
+
+    @include sectionColor("skills", $skills-color);
+
+    @include sectionColor("contact", $contact-color);
+}

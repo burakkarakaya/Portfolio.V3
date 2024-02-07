@@ -2,9 +2,9 @@ class Button{
     constructor(options){
         this.options = options;
     }
-    get generate(){
-        const { key, title } = this.options;
-        return `<button rel="${key}">${title}</button>`;
+    generate(){
+        const { key, button } = this.options;
+        return `<button rel="${key}"><i></i><span>${button.title}</span></button>`;
     }
 }
 

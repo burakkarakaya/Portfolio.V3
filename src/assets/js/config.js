@@ -151,7 +151,7 @@ const config = [
         key: 'skills',
         button: {
             title: 'Skills',
-            degree: 180
+            degree: 215
         },
         layer: {
             color: '#c7dcd9',
@@ -202,7 +202,7 @@ const config = [
         key: 'contact',
         button: {
             title: 'Contact',
-            degree: 240
+            degree: 220
         },
         layer: {
             color: '#f5e4d9',
