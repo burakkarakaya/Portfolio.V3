@@ -1,9 +1,4 @@
-const EVENT_TYPES = {
-    RESIZE: 'EVENTS_ON_RESIZE',
-    MOUSE_MOVE: 'EVENTS_ON_MOUSE_MOVE',
-    MOUSE_ENTER: 'EVENTS_ON_MOUSE_ENTER',
-    MOUSE_LEAVE: 'EVENTS_ON_MOUSE_LEAVE',
-};
+import { EVENT_TYPES } from '@root/enums';
 
 class Events {
     constructor(callback) {
@@ -57,4 +52,4 @@ class Events {
     }
 }
 
-export { Events, EVENT_TYPES };
+export default Events;

@@ -67,8 +67,65 @@ export function getElementOffset(el) {
 
 export function getWindowSize() {
     const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    
+
     const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-    return { width: windowWidth, height: windowHeight, centerX: Math.round( windowWidth * .5 ), centerY: Math.round( windowHeight * .5 ) };
+    return { width: windowWidth, height: windowHeight, centerX: Math.round(windowWidth * .5), centerY: Math.round(windowHeight * .5) };
 };
+
+export function getSiblings(elem) {
+
+    // Setup siblings array and get the first sibling
+    var siblings = [];
+    var sibling = elem.parentNode.firstChild;
+
+    // Loop through each sibling and push to the array
+    while (sibling) {
+        if (sibling.nodeType === 1 && sibling !== elem) {
+            siblings.push(sibling);
+        }
+        sibling = sibling.nextSibling
+    }
+
+    return siblings;
+
+};
+
+export function loadTexture(svg, callback) {
+
+    const entriesArray = Object.entries(svg);
+
+    const letters = entriesArray.map(([key, value]) => ({ key, value }));
+
+    let start = 0;
+
+    const end = letters.length - 1;
+
+    const originalSize = {};
+
+    const load = (ind) => {
+        const key = letters[ind]['key'];
+        const src = letters[ind]['value'];
+        const img = new Image();
+        
+        img.onload = function(){
+            originalSize[ key ] = {
+                width: this.width,
+                height: this.height
+            };
+
+            if (ind < end) {
+                ++ind;
+                load(ind);
+            } else {
+                if (typeof callback !== 'undefined')
+                    callback(originalSize);
+            }
+        };
+
+        img.src = src;
+    };
+
+    load(start);
+
+}

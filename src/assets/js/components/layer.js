@@ -1,23 +1,61 @@
 import { gsap } from "gsap";
 import * as helper from '@root/utils/helper';
 
+import { EVENT_TYPES } from '@root/enums';
+
 class Layer {
-    constructor({ key, button, layer }) {
+    constructor({ key, button, layer }, callback) {
         this.key = key;
-        this.degree = helper.getDegree(button.degree);
+        this.degree = button && helper.getDegree(button.degree);
         this.distance = layer.distance;
         this.radius = layer.radius;
         this.speed = layer.speed;
+        this.duration = layer.duration;
 
         //
         this.buttonPointerWidth = 14;
-        
+
         // element
         this.buttonElement = document.querySelector(`button[rel="${key}"]`);
         this.layerElement = document.querySelector(`section[rel="${key}"]`);
+        this.addEventListeners();
 
         //
         this.initializePosition();
+
+        //
+        this.callback = callback;
+    }
+
+    handleEvent({ type, evt }) {
+        if (typeof this.callback !== 'undefined') {
+            this.callback({ type, evt });
+        }
+    }
+
+    onMouseEnter(evt) {
+        this.handleEvent({ type: EVENT_TYPES.MOUSE_ENTER, evt: evt });
+    }
+
+    onMouseLeave(evt) {
+        this.handleEvent({ type: EVENT_TYPES.MOUSE_LEAVE, evt: evt });
+    }
+
+    onClick(evt){
+        this.handleEvent({ type: EVENT_TYPES.CLICK, evt: evt });
+    }
+
+    addEventListeners() {
+        this.layerElement.addEventListener('mouseenter', this.onMouseEnter.bind(this), false);
+        this.layerElement.addEventListener('mouseleave', this.onMouseLeave.bind(this), false);
+        this.layerElement.addEventListener('click', this.onClick.bind(this), false);
+    }
+
+    removeEventListeners() {
+
+        this.layerElement.removeEventListener('mouseenter', this.onMouseEnter.bind(this), false);
+        this.layerElement.removeEventListener('mouseleave', this.onMouseLeave.bind(this), false);
+        this.layerElement.removeEventListener('click', this.onClick.bind(this), false);
     }
 
     initializePosition() {
@@ -25,15 +63,15 @@ class Layer {
         const { px, py } = this.calculatePosition(window.innerWidth, window.innerHeight, newCoorX, newCoorY, percent);
 
         this.buttonElement?.style && gsap.set(this.buttonElement, {
-                x: px,
-                y: py,
-            });
+            x: px,
+            y: py,
+        });
 
         this.layerElement?.style && gsap.set(this.layerElement, {
-                "--x": `${newCoorX}%`,
-                "--y": `${newCoorY}%`,
-                "--maskSize": `${maskSize}%`,
-            });
+            "--x": `${newCoorX}%`,
+            "--y": `${newCoorY}%`,
+            "--maskSize": `${maskSize}%`,
+        });
     }
 
     calculateCoordinates(clientX, clientY, windowWidth, windowHeight) {
@@ -64,22 +102,21 @@ class Layer {
 
     animateButton(px, py) {
         this.buttonElement?.style && gsap.to(this.buttonElement, {
-                x: px,
-                y: py,
-                duration: 0.5,
-                ease: "sine.out",
-            });
+            x: px,
+            y: py,
+            duration: this.duration,
+            ease: "sine.out",
+        });
     }
 
     animateLayer(newCoorX, newCoorY, maskSize) {
         this.layerElement?.style && gsap.to(this.layerElement, {
-                "--x": `${newCoorX}%`,
-                "--y": `${newCoorY}%`,
-                "--maskSize": `${maskSize}%`,
-                duration: 0.5,
-                ease: "sine.out",
-                //stagger: 0.05,
-            });
+            "--x": `${newCoorX}%`,
+            "--y": `${newCoorY}%`,
+            "--maskSize": `${maskSize}%`,
+            duration: this.duration,
+            ease: "sine.out",
+        });
     }
 
     mouseMove({ x: clientX, y: clientY, width: windowWidth, height: windowHeight }) {

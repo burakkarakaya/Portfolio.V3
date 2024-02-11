@@ -116,6 +116,16 @@ main {
             }
         }
 
+        &[rel="center"] {
+            pointer-events: none;
+            
+            @include utils.clipPath(11%, 6);
+
+            > i{
+                @include utils.clipPath(11%, 6);
+            }
+        }
+
         &.is-active{
             @include utils.clipPath(200%, 100);
             transition: clip-path ease-out 500ms;
@@ -141,4 +151,6 @@ main {
     @include sectionColor("skills", $skills-color);
 
     @include sectionColor("contact", $contact-color);
+
+    @include sectionColor("center", $black);
 }

@@ -1,12 +1,15 @@
 import config from '@root/config';
 
-import { Events, EVENT_TYPES } from '@root/events';
+import { EVENT_TYPES } from '@root/enums';
+import Events from '@root/events';
 import TemplateManagement from '@root/templates/template';
 import LayerManagement from '@root/components/layerManagement';
 
-new TemplateManagement({ ID: document.querySelector('main'), options: config }).init();
+const main = document.querySelector('main');
 
-const layerManagement = new LayerManagement(config);
+new TemplateManagement({ ID: main, options: config }).init();
+
+const layerManagement = new LayerManagement(main, config);
 
 new Events((obj) => {
 
@@ -18,6 +21,11 @@ new Events((obj) => {
         case EVENT_TYPES.MOUSE_MOVE:
             layerManagement.mouseMove(obj.evt);
             break;
+
+        case EVENT_TYPES.MOUSE_LEAVE:
+            //layerManagement.adjust();
+            break;
+
         default:
             break;
     }

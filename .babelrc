@@ -4,7 +4,9 @@
       ["module-resolver", {
         "root": ["./"],
         "alias": {
-            "@root": "./src/assets/js"
+            "@root": "./src/assets/js",
+            "@images": "./src/assets/images",
+            "@svg": "./src/assets/svg"
         }
       }]
     ]

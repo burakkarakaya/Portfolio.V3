@@ -22,8 +22,8 @@ class Section{
     }
 
     generate(){
-        const svgGenerator = new SvgGenerator(this.options.svg);
-        const svgMarkup = svgGenerator.generateSvgMarkup();
+        const svgGenerator = this.options?.svg && new SvgGenerator(this.options.svg);
+        const svgMarkup = this.options?.svg && svgGenerator.generateSvgMarkup();
 
         return `<section rel="${this.options.key}"><i></i>${svgMarkup}</section>`;
     }

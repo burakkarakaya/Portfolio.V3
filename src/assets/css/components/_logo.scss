@@ -1,0 +1,32 @@
+
+@mixin logoColor($sectionName, $fillColor){
+    &[rel="#{$sectionName}"]{
+        .logo{
+            path.cls-1{
+                fill: $fillColor !important;
+            }
+        }
+    }
+}
+
+main {
+
+    .logo{
+        max-width: 200px;
+        display: block;
+        position: fixed;
+        z-index: 110;
+        
+        left: var(--x, -50%);
+        top: var(--y, -50%);
+        transform: translate3d(-50%, -50%, 0);
+    }
+
+    @include logoColor("projects", $project-color);
+
+    @include logoColor("awards", $awards-color);
+
+    @include logoColor("skills", $skills-color);
+
+    @include logoColor("contact", $contact-color);
+}

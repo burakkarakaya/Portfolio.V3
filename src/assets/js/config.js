@@ -10,7 +10,8 @@ const config = [
             color: '#e9e6c4',
             distance: 50,
             radius: 55,
-            speed: .05,
+            speed: 0,
+            duration: 0.2
         },
         svg: {
             fill: '#ffffff',
@@ -106,7 +107,8 @@ const config = [
             color: '#bee7c3',
             distance: 50,
             radius: 44,
-            speed: .1,
+            speed: 0,
+            duration: 0.4
         },
         svg: {
             fill: '#ffffff',
@@ -157,7 +159,8 @@ const config = [
             color: '#c7dcd9',
             distance: 50,
             radius: 33,
-            speed: .2,
+            speed: 0,
+            duration: 0.6
         },
         svg: {
             fill: '#ffffff',
@@ -208,7 +211,8 @@ const config = [
             color: '#f5e4d9',
             distance: 50,
             radius: 22,
-            speed: .1,
+            speed: 0,
+            duration: 0.8
         },
         svg: {
             fill: '#ffffff',
@@ -251,6 +255,17 @@ const config = [
                     path: 'M 513.455 15.3 L 502.505 15.3 L 502.505 26.25 L 502.505 24 L 502.505 34.95 L 490.655 34.95 L 490.655 43.65 L 502.505 43.65 L 502.505 79.95 C 502.361 100.085 510.629 111.532 525.589 112.442 A 32.405 32.405 0 0 0 527.555 112.5 C 540.368 112.5 551.257 101.106 551.257 86.99 A 27.486 27.486 0 0 0 551.255 86.7 L 542.255 84.75 C 540.755 97.5 534.005 102.75 527.705 102.75 A 13.875 13.875 0 0 1 521.003 101.22 C 516.743 98.915 514.402 94.082 513.613 87.242 A 50.717 50.717 0 0 1 513.305 81.45 L 513.305 43.65 L 547.205 43.65 L 547.205 34.95 L 513.305 34.95 C 513.305 34.95 513.455 15.3 513.455 15.3 Z'
                 }
             ]
+        }
+    },
+
+    {
+        key: 'center',
+        layer: {
+            color: '#000000',
+            distance: 50,
+            radius: 11,
+            speed: 0,
+            duration: 1
         }
     },
 
