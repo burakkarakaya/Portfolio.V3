@@ -107,9 +107,9 @@ export function loadTexture(svg, callback) {
         const key = letters[ind]['key'];
         const src = letters[ind]['value'];
         const img = new Image();
-        
-        img.onload = function(){
-            originalSize[ key ] = {
+
+        img.onload = function () {
+            originalSize[key] = {
                 width: this.width,
                 height: this.height
             };
@@ -128,4 +128,16 @@ export function loadTexture(svg, callback) {
 
     load(start);
 
+}
+
+export function elementHeight(elm) {
+    var elmHeight, elmMargin;
+    if (document.all) {// IE
+        elmHeight = elm.currentStyle.height;
+        elmMargin = parseInt(elm.currentStyle.marginTop, 10) + parseInt(elm.currentStyle.marginBottom, 10);
+    } else {// Mozilla
+        elmHeight = document.defaultView.getComputedStyle(elm, '').getPropertyValue('height');
+        elmMargin = parseInt(document.defaultView.getComputedStyle(elm, '').getPropertyValue('margin-top')) + parseInt(document.defaultView.getComputedStyle(elm, '').getPropertyValue('margin-bottom'));
+    }
+    return (parseFloat(elmHeight) + parseFloat(elmMargin));
 }

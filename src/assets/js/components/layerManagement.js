@@ -6,13 +6,16 @@ import { EVENT_TYPES } from '@root/enums';
 import Stage from './stage';
 import Layer from './layer';
 import Logo from './logo';
+import Navigation from './navigation';
 
 class LayerManagement {
     constructor(ID, options) {
+        this.stage = null;
         this.ID = ID;
         this.options = options;
         this.layers = options.map(obj => new Layer(obj, this.layerCallback.bind(this)));
         this.logo = new Logo(this.logoCallback.bind(this));
+        this.navigation = new Navigation(this.navigationCallback.bind(this));
         this._activeted = false;
         this.adjust();
 
@@ -48,24 +51,72 @@ class LayerManagement {
             const sib = helper.getSiblings(target);
 
             sib.forEach((element) => element.classList.add('de-active'));
-
             target.classList.add('is-active');
+            this.ID.setAttribute('rel', target.getAttribute('rel') || '');
+
             this._activeted = false;
 
-            const activeRel = target.getAttribute('rel') || '';
-            const activeSectionOptions = this.options.find(x => x.key === activeRel);
-            const activeSvgFileSrc = svgFileSrc[`sections`][`${activeRel}`];
-
-            helper.loadTexture(activeSvgFileSrc, (originalSize) => {
-                const stage = new Stage(activeSectionOptions, originalSize, activeSvgFileSrc);
-                stage.init();
-
-                setTimeout(() => {
-                    document.body.classList.add(`ready`);
-                    stage.startAnim();
-                }, 500);
-            });
+            this.loadStage(target.getAttribute('rel') || '');
         }
+    }
+
+    loadStage(activeRel) {
+
+        const activeSectionOptions = this.options.find(x => x.key === activeRel);
+        const activeSvgFileSrc = svgFileSrc[`sections`][`${activeRel}`];
+
+        this.navigation.focused(activeRel);
+
+        helper.loadTexture(activeSvgFileSrc, (originalSize) => {
+
+            if (this.stage == null) {
+                this.stage = new Stage(activeSectionOptions, originalSize, activeSvgFileSrc, (obj) => {
+
+                    switch (obj.type) {
+                        case EVENT_TYPES.ANIMATION_END:
+                            this.navigation.activeted = true;
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                });
+            } else {
+                this.stage.updateProp(activeSectionOptions, originalSize, activeSvgFileSrc);
+            }
+
+            this.stage.init();
+
+            setTimeout(() => {
+                this.stage.startAnim();
+                document.body.classList.add(`ready`);
+            }, 111);
+        });
+    }
+
+    newStage(activeRel) {
+        if (this.stage != null) {
+            this.stage.endAnim();
+        }
+
+        setTimeout(() => {
+
+            const target = document.querySelector(`section[rel="${activeRel}"]`);
+            const sib = helper.getSiblings(target);
+
+            sib.forEach((element) => {
+                element.classList.add('de-active');
+                element.classList.remove('is-active');
+            });
+
+            target.classList.remove('de-active');
+            target.classList.add('is-active');
+
+            this.ID.setAttribute('rel', target.getAttribute('rel') || '');
+
+            this.loadStage(activeRel);
+
+        }, 1000);
     }
 
     layerCallback(obj) {
@@ -93,11 +144,34 @@ class LayerManagement {
         // nothing
     }
 
-    adjust() {
+    navigationCallback(obj) {
+        if (!this._activeted) {
+            const evt = obj.evt;
 
+            switch (obj.type) {
+                case EVENT_TYPES.CLICK:
+
+                    const target = evt.currentTarget;
+
+                    this.newStage(target.getAttribute('rel') || '');
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    adjust() {
         this.windowDimensions = helper.getWindowSize();
 
         this.layers.forEach((layer) => layer.initializePosition());
+
+        this.logo.initializePosition();
+    }
+
+    resizeStop() {
+        this.stage && this.stage.adjust();
     }
 
     mouseMove(evt) {

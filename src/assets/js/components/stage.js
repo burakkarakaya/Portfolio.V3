@@ -1,5 +1,8 @@
+import * as helper from '@root/utils/helper';
+import { EVENT_TYPES } from '@root/enums';
+
 class Stage {
-    constructor(options, originalSize, svgFileSrc) {
+    constructor(options, originalSize, svgFileSrc, callback) {
         this.options = options;
         this.lettersOrginalSize = originalSize;
         this.svgFileSrc = svgFileSrc;
@@ -8,9 +11,6 @@ class Stage {
         this.world = null;
         this.render = null;
         this.mouseConstraint = null;
-        this.canvas = null;
-        this.title = null;
-        this.paths = null;
         this.content = null;
         this.el = {
             canvas: '.stage',
@@ -29,6 +29,22 @@ class Stage {
         };
         this.letterIsSleeping = true;
         this.letters = [];
+
+        this.canvas = document.querySelector(this.el.canvas);
+        this.title = document.querySelector(this.el.title);
+        this.paths = this.title.querySelectorAll(this.el.path);
+
+        this.endAnimStart = false;
+
+        this.setScene();
+
+        this.callback = callback;
+    }
+
+    dispatchEvent({ type }) {
+        if (typeof this.callback !== 'undefined') {
+            this.callback({ type });
+        }
     }
 
     addLetters() {
@@ -46,11 +62,15 @@ class Stage {
                 yScale = bounding.height / this.lettersOrginalSize[letter].height;
             }
 
-            const rectangle = Matter.Bodies.rectangle(
-                bounding.left + bounding.width / 2,
-                bounding.top + bounding.height / 2,
-                bounding.width,
-                bounding.height + 20,
+            const _x = bounding.left + bounding.width / 2;
+
+            const _y = bounding.top + bounding.height / 2;
+
+            const _width = bounding.width;
+
+            const _height = bounding.height + 20;
+
+            const rectangle = Matter.Bodies.rectangle(_x, _y, _width, _height,
                 {
                     friction: 1,
                     restitution: 1,
@@ -84,7 +104,7 @@ class Stage {
 
         switch (dir) {
             case 'top':
-                pos = { x: wt * .5, y: 0, width: wt, height: height };
+                pos = { x: wt * .5, y: -ht, width: wt, height: height };
                 break;
 
             case 'left':
@@ -106,36 +126,36 @@ class Stage {
         return pos;
     }
 
-    addWalls() {
-        const set = (o) => {
-            o = o || {};
-            const dir = o['direction'] || '';
-            const pos = this.getWallPos({ direction: dir });
+    setWall({ dir = '', isStatic = true }) {
 
-            this.walls[dir] = Matter.Bodies.rectangle(
-                pos.x,
-                pos.y,
-                pos.width,
-                pos.height,
-                {
-                    restitution: 1,
-                    isStatic: true,
-                    collisionFilter: {
-                        category: 0x0002
-                    },
-                    render: {
-                        visible: true,
-                        fillStyle: '#000'
-                    }
+        const pos = this.getWallPos({ direction: dir });
+
+        this.walls[dir] = Matter.Bodies.rectangle(
+            pos.x,
+            pos.y,
+            pos.width,
+            pos.height,
+            {
+                restitution: 1,
+                isStatic: isStatic,
+                collisionFilter: {
+                    category: 0x0002
+                },
+                render: {
+                    visible: false,
+                    //fillStyle: '#000'
                 }
-            );
-            Matter.Composite.add(this.world, this.walls[dir]);
-        };
+            }
+        );
+        Matter.Composite.add(this.world, this.walls[dir]);
+    }
 
-        set({ direction: 'top' });
-        set({ direction: 'left' });
-        set({ direction: 'right' });
-        set({ direction: 'bottom' });
+    addWalls() {
+
+        this.setWall({ dir: 'top',  });
+        this.setWall({ dir: 'left' });
+        this.setWall({ dir: 'right' });
+        this.setWall({ dir: 'bottom' });
     }
 
     setScene() {
@@ -165,6 +185,22 @@ class Stage {
         this.runner = Matter.Runner.create();
         Matter.Runner.run(this.runner, this.engine);
 
+        // tüm harfler sahne dışına çıktığında tetiklenecek 
+        /*Matter.Events.on(this.engine, 'afterUpdate', (evt)=>{
+
+            if (this.endAnimStart){
+                const _h = helper.elementHeight(this.title); 
+                const b = this.letters.every((k)=>k.position.y >= (window.innerHeight + _h));
+                if (b){
+                    this.endAnimStart = false;
+
+                    this.dispatchEvent({ type: EVENT_TYPES.ANIMATION_END });
+                }
+            }
+        });*/
+    }
+
+    setMouse() {
         this.mouse = Matter.Mouse.create(this.render.canvas);
         this.mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: this.mouse,
@@ -189,14 +225,42 @@ class Stage {
         this.canvas.height = ht;
 
         Matter.Composite.clear(this.world);
-
         Matter.Events.off(this.engine);
 
+        this.setMouse();
         this.addWalls();
         this.addLetters();
-        // this.addContent(); // Eklenmeyen fonksiyon, isteğe bağlı olarak eklenebilir.
+        this.startAnim();
     }
 
+    init() {
+        this.setMouse();
+        this.addWalls();
+        this.addLetters();
+    }
+
+    destroy() {
+        Matter.Render.stop(this.render);
+        Matter.World.clear(this.engine.world);
+        Matter.Engine.clear(this.engine);
+        this.render.canvas.remove();
+        this.render.canvas = null;
+        this.render.context = null;
+        this.render.textures = {};
+    }
+
+    //
+    updateProp(options, originalSize, svgFileSrc){
+        this.options = options;
+        this.lettersOrginalSize = originalSize;
+        this.svgFileSrc = svgFileSrc;
+
+        this.canvas = document.querySelector(this.el.canvas);
+        this.title = document.querySelector(this.el.title);
+        this.paths = this.title.querySelectorAll(this.el.path);
+    }
+    
+    // animation
     startAnim() {
         const n = this.letters.length;
         const c = Math.round(n * .5);
@@ -210,15 +274,18 @@ class Stage {
         }
     }
 
-    init() {
+    endAnim(){
 
-        this.canvas = document.querySelector(this.el.canvas);
-        this.title = document.querySelector(this.el.title);
-        this.paths = this.title.querySelectorAll(this.el.path);
+        this.endAnimStart = true;
 
-        this.setScene();
-        this.addWalls();
-        this.addLetters();
+        Matter.Body.set(this.walls['bottom'], 'isStatic', false);
+
+        Matter.Body.set(this.walls['bottom'], 'position', { y: window.innerHeight * 2 });
+
+        for (var i = 0; i < this.letters.length; ++i) {
+            var letter = this.letters[i];
+            Matter.Body.applyForce(letter, { x: letter.position.x, y: letter.position.y }, { x: 0, y: -0.01 });
+        }
     }
 }
 

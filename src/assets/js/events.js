@@ -3,6 +3,8 @@ import { EVENT_TYPES } from '@root/enums';
 class Events {
     constructor(callback) {
         this.callback = callback;
+        this.timeOutFunctionId;
+        this.duration = 555;
     }
 
     handleEvent({ type, evt }) {
@@ -13,6 +15,11 @@ class Events {
 
     onAdjust(evt) {
         this.handleEvent({ type: EVENT_TYPES.RESIZE, evt: evt });
+
+        clearTimeout(this.timeOutFunctionId);
+        this.timeOutFunctionId = setTimeout(() => {
+            this.handleEvent({ type: EVENT_TYPES.RESIZE_STOP, evt: evt });
+        }, this.duration);
     }
 
     onMouseMove(evt) {

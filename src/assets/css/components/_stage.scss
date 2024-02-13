@@ -18,4 +18,13 @@
     svg.letters {
         opacity: 0;
     }
+
+    main{
+        section{
+            svg.letters{
+                top:0;
+                transform: translate3d(0, -100%, 0);
+            }
+        }
+    }
 }

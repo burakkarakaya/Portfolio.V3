@@ -9,13 +9,17 @@ const main = document.querySelector('main');
 
 new TemplateManagement({ ID: main, options: config }).init();
 
-const layerManagement = new LayerManagement(main, config);
+window.layerManagement = new LayerManagement(main, config);
 
 new Events((obj) => {
 
     switch (obj.type) {
         case EVENT_TYPES.RESIZE:
             layerManagement.adjust();
+            break;
+
+        case EVENT_TYPES.RESIZE_STOP:
+            layerManagement.resizeStop();
             break;
 
         case EVENT_TYPES.MOUSE_MOVE:
