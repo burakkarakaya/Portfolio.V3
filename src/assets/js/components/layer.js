@@ -78,7 +78,7 @@ class Layer {
         const x = Math.round((clientX / window.innerWidth) * 100);
         const y = Math.round((clientY / window.innerHeight) * 100);
         const maskSize = Math.abs((x - this.distance) * this.speed);
-        const newCoorX = this.distance - (x - this.distance) * 0.3;
+        const newCoorX = this.distance - (x - this.distance) * 0.1;
         const newCoorY = this.distance - (y - this.distance) * 0.3;
         const width = (windowWidth / 100) * (this.radius + maskSize);
         const height = (windowHeight / 100) * (this.radius + maskSize);

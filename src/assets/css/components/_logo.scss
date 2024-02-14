@@ -1,25 +1,54 @@
-
-@mixin logoColor($sectionName, $fillColor){
-    &[rel="#{$sectionName}"]{
-        .logo{
-            path.cls-1{
-                fill: $fillColor !important;
+@mixin logoColor($sectionName, $fillColor) {
+    &[rel="#{$sectionName}"] {
+        .logo-wrapper.center{
+            .logo {
+                path.cls-1 {
+                    fill: $fillColor !important;
+                }
             }
         }
+        
     }
 }
 
 main {
 
-    .logo{
-        max-width: 200px;
-        display: block;
-        position: fixed;
-        z-index: 110;
-        
-        left: var(--x, -50%);
-        top: var(--y, -50%);
-        transform: translate3d(-50%, -50%, 0);
+    .logo-wrapper {
+
+        &.center {
+
+            display: block;
+            position: fixed;
+            z-index: 110;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            transform: translate(var(--x, 50%), var(--y, 50%));
+            top: 0;
+            left: 0;
+            will-change: transform;
+
+            .logo {
+                pointer-events: all;
+                max-width: 150px;
+                transform: translate3d(-50%, -50%, 0);
+            }
+
+        }
+
+        &.top{
+            position: relative;
+            z-index: 102;
+            pointer-events: none;
+            height: 90px;
+
+            .logo {
+                opacity: 0;
+                max-width: 100px;
+                transform: translate3d(15%, -25%, 0);
+            }
+
+        }
     }
 
     @include logoColor("projects", $project-color);
@@ -29,4 +58,17 @@ main {
     @include logoColor("skills", $skills-color);
 
     @include logoColor("contact", $contact-color);
+}
+
+.ready{
+    .logo-wrapper.center {
+        display: none;
+    }
+    .logo-wrapper.top {
+        .logo{
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+    
 }

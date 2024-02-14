@@ -4,7 +4,7 @@ const config = [
         key: 'projects',
         button: {
             title: 'Projects',
-            degree: 205
+            degree: 202
         },
         layer: {
             color: '#e9e6c4',

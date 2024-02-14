@@ -4,6 +4,8 @@ import { EVENT_TYPES } from '@root/enums';
 import Events from '@root/events';
 import TemplateManagement from '@root/templates/template';
 import LayerManagement from '@root/components/layerManagement';
+import AssetsLoader from '@root/components/assetsLoader';
+
 
 const main = document.querySelector('main');
 
@@ -35,6 +37,9 @@ new Events((obj) => {
     }
 }).init();
 
-setTimeout(() => {
-    layerManagement.activeted = true;
-}, 2000);
+
+new AssetsLoader(({ type, data }) => {
+    if (type == 'success') {
+        layerManagement.starting();
+    }
+});

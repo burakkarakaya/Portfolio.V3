@@ -1,41 +1,67 @@
-.intro {
+@mixin introColor($sectionName, $fillColor) {
+        &[rel="#{$sectionName}"] {
+                .intro {
+                        background: $fillColor;
+                }
+        }
+}
 
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 11;
-    background: #333333;
-    pointer-events: none;
+main {
 
-    -webkit-mask: url(../images/urban-sprite.png);
-            mask: url(../images/urban-sprite.png);
-    -webkit-mask-size: 2300% 100%;
-            mask-size: 2300% 100%;
-    -webkit-animation: mask-play 1.4s steps(22) forwards;
-            animation: mask-play 1.4s steps(22) forwards;
-  }
+        .intro {
 
-  @-webkit-keyframes mask-play {
-    from {
-      -webkit-mask-position: 0% 0;
-              mask-position: 0% 0;
-    }
-    to {
-      -webkit-mask-position: 100% 0;
-              mask-position: 100% 0;
-    }
-  }
-  
-  @keyframes mask-play {
-    from {
-      -webkit-mask-position: 0% 0;
-              mask-position: 0% 0;
-    }
-    to {
-      -webkit-mask-position: 100% 0;
-              mask-position: 100% 0;
-    }
-  }
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                display: block;
+                top: 0;
+                left: 0;
+                z-index: 113;
+                background: #333333;
+                pointer-events: none;
+
+                &.animate {
+
+                        -webkit-mask: url(../images/nature-sprite.png);
+                        mask: url(../images/nature-sprite.png);
+                        
+                        -webkit-mask-size: 2300% 100%;
+                        mask-size: 2300% 100%;
+                        -webkit-animation: mask-play 1.4s steps(22) forwards;
+                        animation: mask-play 1.4s steps(22) forwards;
+
+                }
+        }
+
+        @include introColor("projects", $project-color);
+
+        @include introColor("awards", $awards-color);
+    
+        @include introColor("skills", $skills-color);
+    
+        @include introColor("contact", $contact-color);
+}
+
+@-webkit-keyframes mask-play {
+        from {
+                -webkit-mask-position: 0% 0;
+                mask-position: 0% 0;
+        }
+
+        to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+        }
+}
+
+@keyframes mask-play {
+        from {
+                -webkit-mask-position: 0% 0;
+                mask-position: 0% 0;
+        }
+
+        to {
+                -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+        }
+}

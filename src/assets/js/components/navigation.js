@@ -10,7 +10,7 @@ class Navigation {
             selected: 'selected'
         };
         this._activeted = true;
-        this.timeout = 4000;
+        this.timeout = 5000;
 
         this.addEventListeners();
 

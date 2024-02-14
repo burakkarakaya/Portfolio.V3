@@ -8,4 +8,8 @@ const EVENT_TYPES = {
     ANIMATION_END: 'ANIMATION_END'
 };
 
+const ANIMATION_SPEED = {
+
+};
+
 export {EVENT_TYPES};

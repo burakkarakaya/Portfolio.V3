@@ -1,11 +1,10 @@
 import svgFileSrc from '@svg/**/*.svg';
-
 import * as helper from '@root/utils/helper';
 import { EVENT_TYPES } from '@root/enums';
-
 import Stage from './stage';
 import Layer from './layer';
 import Logo from './logo';
+import Intro from './intro';
 import Navigation from './navigation';
 
 class LayerManagement {
@@ -15,23 +14,33 @@ class LayerManagement {
         this.options = options;
         this.layers = options.map(obj => new Layer(obj, this.layerCallback.bind(this)));
         this.logo = new Logo(this.logoCallback.bind(this));
+        this.intro = new Intro();
         this.navigation = new Navigation(this.navigationCallback.bind(this));
         this._activeted = false;
         this.adjust();
 
+        // Bind event handlers in the constructor
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.layerCallback = this.layerCallback.bind(this);
+        this.logoCallback = this.logoCallback.bind(this);
+        this.navigationCallback = this.navigationCallback.bind(this);
+        this.resizeStop = this.resizeStop.bind(this);
+        this.mouseMove = this.mouseMove.bind(this);
     }
 
-    get activeted() {
-        return this._activeted;
+    // Getter and setter can be simplified to a single line
+    get activeted() { return this._activeted; }
+    set activeted(b) { this._activeted = b; }
+
+    // start scene
+    starting() {
+        this.intro.animate(true);
+        this._activeted = true;
     }
 
-    set activeted(b) {
-        this._activeted = b;
-    }
-
+    //
     handleMouseEnter(evt) {
         if (this._activeted) {
             const target = evt.currentTarget;
@@ -61,24 +70,16 @@ class LayerManagement {
     }
 
     loadStage(activeRel) {
-
         const activeSectionOptions = this.options.find(x => x.key === activeRel);
-        const activeSvgFileSrc = svgFileSrc[`sections`][`${activeRel}`];
+        const activeSvgFileSrc = svgFileSrc.sections[activeRel];
 
         this.navigation.focused(activeRel);
 
         helper.loadTexture(activeSvgFileSrc, (originalSize) => {
-
-            if (this.stage == null) {
+            if (!this.stage) {
                 this.stage = new Stage(activeSectionOptions, originalSize, activeSvgFileSrc, (obj) => {
-
-                    switch (obj.type) {
-                        case EVENT_TYPES.ANIMATION_END:
-                            this.navigation.activeted = true;
-                            break;
-                    
-                        default:
-                            break;
+                    if (obj.type === EVENT_TYPES.ANIMATION_END) {
+                        this.navigation.activeted = true;
                     }
                 });
             } else {
@@ -89,18 +90,39 @@ class LayerManagement {
 
             setTimeout(() => {
                 this.stage.startAnim();
-                document.body.classList.add(`ready`);
+                document.body.classList.add('ready');
             }, 111);
         });
     }
 
+    async backToReturn() {
+        if (this.stage) {
+            this.stage.endAnim();
+        }
+
+        await helper.delay(1000);
+
+        this.intro.animate(false);
+
+        document.body.classList.remove('ready');
+        document.querySelectorAll('.de-active, .is-active').forEach((element) => element.classList.remove('de-active', 'is-active'));
+        
+        await helper.delay(100);
+
+        this.intro.animate(true);
+
+        await helper.delay(2000);
+
+        document.querySelector('main').removeAttribute('rel');
+        this._activeted = true;
+    }
+
     newStage(activeRel) {
-        if (this.stage != null) {
+        if (this.stage) {
             this.stage.endAnim();
         }
 
         setTimeout(() => {
-
             const target = document.querySelector(`section[rel="${activeRel}"]`);
             const sib = helper.getSiblings(target);
 
@@ -115,12 +137,10 @@ class LayerManagement {
             this.ID.setAttribute('rel', target.getAttribute('rel') || '');
 
             this.loadStage(activeRel);
-
         }, 1000);
     }
 
     layerCallback(obj) {
-
         if (this._activeted) {
             const evt = obj.evt;
 
@@ -141,7 +161,16 @@ class LayerManagement {
     }
 
     logoCallback(obj) {
-        // nothing
+        if (!this._activeted) {
+
+            switch (obj.type) {
+                case EVENT_TYPES.CLICK:
+                    this.backToReturn();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     navigationCallback(obj) {
@@ -150,11 +179,8 @@ class LayerManagement {
 
             switch (obj.type) {
                 case EVENT_TYPES.CLICK:
-
                     const target = evt.currentTarget;
-
                     this.newStage(target.getAttribute('rel') || '');
-
                     break;
                 default:
                     break;
@@ -164,19 +190,17 @@ class LayerManagement {
 
     adjust() {
         this.windowDimensions = helper.getWindowSize();
-
         this.layers.forEach((layer) => layer.initializePosition());
-
         this.logo.initializePosition();
     }
 
     resizeStop() {
-        this.stage && this.stage.adjust();
+        (this.stage && !this._activeted) && this.stage.adjust();
     }
 
     mouseMove(evt) {
         if (this._activeted) {
-            const obj = Object.assign({}, this.windowDimensions, helper.getMousePos(evt));
+            const obj = { ...this.windowDimensions, ...helper.getMousePos(evt) };
             this.layers.forEach((layer) => layer.mouseMove(obj));
             this.logo.mouseMove(obj);
         }

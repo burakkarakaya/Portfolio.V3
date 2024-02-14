@@ -9,7 +9,8 @@ class Logo {
         this.distance = 50;
 
         // element
-        this.logoElement = document.querySelector(`.logo`);
+        this.logoElementWrapper = document.querySelector(`.logo-wrapper.center`);
+        this.logoElement = document.querySelector(`.logo-wrapper.top .logo`);
         this.addEventListeners();
 
         //
@@ -53,7 +54,7 @@ class Logo {
     initializePosition() {
         const { x, y, maskSize, newCoorX, newCoorY, percent } = this.calculateCoordinates(window.innerWidth * .5, window.innerHeight * .5, window.innerWidth, window.innerHeight);
 
-        this.logoElement?.style && gsap.set(this.logoElement, {
+        this.logoElementWrapper?.style && gsap.set(this.logoElementWrapper, {
             "--x": `${newCoorX}%`,
             "--y": `${newCoorY}%`
         });
@@ -62,7 +63,7 @@ class Logo {
     calculateCoordinates(clientX, clientY, windowWidth, windowHeight) {
         const x = Math.round((clientX / window.innerWidth) * 100);
         const y = Math.round((clientY / window.innerHeight) * 100);
-        const newCoorX = this.distance - (x - this.distance) * 0.3;
+        const newCoorX = this.distance - (x - this.distance) * 0.1;
         const newCoorY = this.distance - (y - this.distance) * 0.3;
 
         return {
@@ -74,8 +75,7 @@ class Logo {
     }
 
     animateLogo(newCoorX, newCoorY) {
-
-        this.logoElement?.style && gsap.set(this.logoElement, {
+        this.logoElementWrapper?.style && gsap.set(this.logoElementWrapper, {
             "--x": `${newCoorX}%`,
             "--y": `${newCoorY}%`,
             "duration": 1,

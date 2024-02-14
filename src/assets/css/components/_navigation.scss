@@ -4,6 +4,13 @@
     bottom: 20;
     pointer-events: none;
     opacity: 0;
+    transform: translate3d(22%, 0, 0);
+
+    a span{
+        color: #FFFFFF;
+        font-weight: 500;
+        line-height: 21px;
+    }
 }
 
 .ready{
