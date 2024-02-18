@@ -8,8 +8,10 @@ const EVENT_TYPES = {
     ANIMATION_END: 'ANIMATION_END'
 };
 
-const ANIMATION_SPEED = {
-
+const ANIMATION = {
+    SPEED_X: 0.1,
+    SPEED_Y: 0.3,
+    EASE: 'sine.out'
 };
 
-export {EVENT_TYPES};
+export {EVENT_TYPES, ANIMATION};

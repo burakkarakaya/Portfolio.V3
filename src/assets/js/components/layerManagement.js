@@ -106,7 +106,7 @@ class LayerManagement {
 
         document.body.classList.remove('ready');
         document.querySelectorAll('.de-active, .is-active').forEach((element) => element.classList.remove('de-active', 'is-active'));
-        
+
         await helper.delay(100);
 
         this.intro.animate(true);
@@ -117,27 +117,28 @@ class LayerManagement {
         this._activeted = true;
     }
 
-    newStage(activeRel) {
+    async newStage(activeRel) {
         if (this.stage) {
             this.stage.endAnim();
         }
+        
 
-        setTimeout(() => {
-            const target = document.querySelector(`section[rel="${activeRel}"]`);
-            const sib = helper.getSiblings(target);
+        await helper.delay(1000);
 
-            sib.forEach((element) => {
-                element.classList.add('de-active');
-                element.classList.remove('is-active');
-            });
+        const target = document.querySelector(`section[rel="${activeRel}"]`);
+        const sib = helper.getSiblings(target);
 
-            target.classList.remove('de-active');
-            target.classList.add('is-active');
+        sib.forEach((element) => {
+            element.classList.add('de-active');
+            element.classList.remove('is-active');
+        });
 
-            this.ID.setAttribute('rel', target.getAttribute('rel') || '');
+        target.classList.remove('de-active');
+        target.classList.add('is-active');
 
-            this.loadStage(activeRel);
-        }, 1000);
+        this.ID.setAttribute('rel', target.getAttribute('rel') || '');
+
+        this.loadStage(activeRel);
     }
 
     layerCallback(obj) {
@@ -189,9 +190,13 @@ class LayerManagement {
     }
 
     adjust() {
+        this.initializePosition(false);
+    }
+
+    initializePosition( animated = false ) {
         this.windowDimensions = helper.getWindowSize();
-        this.layers.forEach((layer) => layer.initializePosition());
-        this.logo.initializePosition();
+        this.layers.forEach((layer) => layer.initializePosition(animated));
+        this.logo.initializePosition(animated);
     }
 
     resizeStop() {

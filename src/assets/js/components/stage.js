@@ -75,6 +75,7 @@ class Stage {
                     friction: 1,
                     restitution: 1,
                     isSleeping: this.letterIsSleeping,
+                   
                     collisionFilter: {
                         category: 0x0004
                     },
@@ -186,15 +187,17 @@ class Stage {
         Matter.Runner.run(this.runner, this.engine);
 
         // tüm harfler sahne dışına çıktığında tetiklenecek 
-        /*Matter.Events.on(this.engine, 'afterUpdate', (evt)=>{
+        /*const _self = this;
+        Matter.Events.on(this.engine, 'afterUpdate', (evt)=>{
 
-            if (this.endAnimStart){
-                const _h = helper.elementHeight(this.title); 
-                const b = this.letters.every((k)=>k.position.y >= (window.innerHeight + _h));
+            if (_self.endAnimStart){
+                const _h = helper.elementHeight(_self.title); 
+                const b = _self.letters.every((k)=>k.position.y >= (window.innerHeight + _h));
                 if (b){
-                    this.endAnimStart = false;
+                    _self.endAnimStart = false;
 
-                    this.dispatchEvent({ type: EVENT_TYPES.ANIMATION_END });
+                    _self.dispatchEvent({ type: EVENT_TYPES.ANIMATION_END });
+                    
                 }
             }
         });*/

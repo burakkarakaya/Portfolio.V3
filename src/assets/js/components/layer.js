@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import * as helper from '@root/utils/helper';
 
-import { EVENT_TYPES } from '@root/enums';
+import { EVENT_TYPES, ANIMATION } from '@root/enums';
 
 class Layer {
     constructor({ key, button, layer }, callback) {
@@ -41,7 +41,7 @@ class Layer {
         this.handleEvent({ type: EVENT_TYPES.MOUSE_LEAVE, evt: evt });
     }
 
-    onClick(evt){
+    onClick(evt) {
         this.handleEvent({ type: EVENT_TYPES.CLICK, evt: evt });
     }
 
@@ -58,28 +58,57 @@ class Layer {
         this.layerElement.removeEventListener('click', this.onClick.bind(this), false);
     }
 
-    initializePosition() {
+    initializePosition(animated = false) {
         const { x, y, maskSize, newCoorX, newCoorY, percent } = this.calculateCoordinates(window.innerWidth * .5, window.innerHeight * .5, window.innerWidth, window.innerHeight);
         const { px, py } = this.calculatePosition(window.innerWidth, window.innerHeight, newCoorX, newCoorY, percent);
 
-        this.buttonElement?.style && gsap.set(this.buttonElement, {
-            x: px,
-            y: py,
-        });
+        if (this.buttonElement?.style) {
+            gsap.killTweensOf(this.buttonElement);
 
-        this.layerElement?.style && gsap.set(this.layerElement, {
-            "--x": `${newCoorX}%`,
-            "--y": `${newCoorY}%`,
-            "--maskSize": `${maskSize}%`,
-        });
+            if (animated) {
+                gsap.to(this.buttonElement, {
+                    x: px,
+                    y: py,
+                    duration: this.duration * .5,
+                    ease: ANIMATION.EASE,
+                });
+            } else {
+                gsap.set(this.buttonElement, {
+                    x: px,
+                    y: py
+                });
+            }
+
+        }
+
+        if (this.layerElement?.style) {
+            gsap.killTweensOf(this.layerElement);
+
+            if (animated) {
+                gsap.to(this.layerElement, {
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`,
+                    "--maskSize": `${maskSize}%`,
+                    duration: this.duration * .5,
+                    ease: ANIMATION.EASE,
+                });
+            } else {
+                gsap.set(this.layerElement, {
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`,
+                    "--maskSize": `${maskSize}%`
+                });
+            }
+
+        }
     }
 
     calculateCoordinates(clientX, clientY, windowWidth, windowHeight) {
         const x = Math.round((clientX / window.innerWidth) * 100);
         const y = Math.round((clientY / window.innerHeight) * 100);
         const maskSize = Math.abs((x - this.distance) * this.speed);
-        const newCoorX = this.distance - (x - this.distance) * 0.1;
-        const newCoorY = this.distance - (y - this.distance) * 0.3;
+        const newCoorX = this.distance - (x - this.distance) * ANIMATION.SPEED_X;
+        const newCoorY = this.distance - (y - this.distance) * ANIMATION.SPEED_Y;
         const width = (windowWidth / 100) * (this.radius + maskSize);
         const height = (windowHeight / 100) * (this.radius + maskSize);
         const percent = Math.sqrt(width * width + height * height) / Math.sqrt(2);
@@ -105,7 +134,7 @@ class Layer {
             x: px,
             y: py,
             duration: this.duration,
-            ease: "sine.out",
+            ease: ANIMATION.EASE,
         });
     }
 
@@ -115,7 +144,7 @@ class Layer {
             "--y": `${newCoorY}%`,
             "--maskSize": `${maskSize}%`,
             duration: this.duration,
-            ease: "sine.out",
+            ease: ANIMATION.EASE,
         });
     }
 

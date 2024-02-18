@@ -1,12 +1,13 @@
 import { gsap } from "gsap";
 import * as helper from '@root/utils/helper';
 
-import { EVENT_TYPES } from '@root/enums';
+import { EVENT_TYPES, ANIMATION } from '@root/enums';
 
 class Logo {
     constructor(callback) {
 
         this.distance = 50;
+        this.duration = 1;
 
         // element
         this.logoElementWrapper = document.querySelector(`.logo-wrapper.center`);
@@ -34,7 +35,7 @@ class Logo {
         this.handleEvent({ type: EVENT_TYPES.MOUSE_LEAVE, evt: evt });
     }
 
-    onClick(evt){
+    onClick(evt) {
         this.handleEvent({ type: EVENT_TYPES.CLICK, evt: evt });
     }
 
@@ -51,20 +52,34 @@ class Logo {
         this.logoElement.removeEventListener('click', this.onClick.bind(this), false);
     }
 
-    initializePosition() {
+    initializePosition(animated = false) {
         const { x, y, maskSize, newCoorX, newCoorY, percent } = this.calculateCoordinates(window.innerWidth * .5, window.innerHeight * .5, window.innerWidth, window.innerHeight);
 
-        this.logoElementWrapper?.style && gsap.set(this.logoElementWrapper, {
-            "--x": `${newCoorX}%`,
-            "--y": `${newCoorY}%`
-        });
+        if (this.logoElementWrapper?.style) {
+            gsap.killTweensOf(this.logoElementWrapper);
+            
+            if (animated) {
+                gsap.to(this.logoElementWrapper, {
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`,
+                    "duration": this.duration * .5,
+                    "ease": ANIMATION.EASE
+                });
+            }else{
+                gsap.set(this.logoElementWrapper, {
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`
+                });
+            }
+            
+        }
     }
 
     calculateCoordinates(clientX, clientY, windowWidth, windowHeight) {
         const x = Math.round((clientX / window.innerWidth) * 100);
         const y = Math.round((clientY / window.innerHeight) * 100);
-        const newCoorX = this.distance - (x - this.distance) * 0.1;
-        const newCoorY = this.distance - (y - this.distance) * 0.3;
+        const newCoorX = this.distance - (x - this.distance) * ANIMATION.SPEED_X;
+        const newCoorY = this.distance - (y - this.distance) * ANIMATION.SPEED_Y;
 
         return {
             x,
@@ -75,11 +90,11 @@ class Logo {
     }
 
     animateLogo(newCoorX, newCoorY) {
-        this.logoElementWrapper?.style && gsap.set(this.logoElementWrapper, {
+        this.logoElementWrapper?.style && gsap.to(this.logoElementWrapper, {
             "--x": `${newCoorX}%`,
             "--y": `${newCoorY}%`,
-            "duration": 1,
-            "ease": "sine.out"
+            "duration": this.duration,
+            "ease": ANIMATION.EASE
         });
     }
 

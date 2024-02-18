@@ -17,6 +17,10 @@ main {
 
         &.center {
 
+            &.de-active{
+                display: none;
+            }
+
             display: block;
             position: fixed;
             z-index: 110;
@@ -41,11 +45,13 @@ main {
             z-index: 102;
             pointer-events: none;
             height: 90px;
-
             .logo {
+                filter: invert(.8);
                 opacity: 0;
                 max-width: 100px;
-                transform: translate3d(15%, -25%, 0);
+                transform: translate3d(-100%, -25%, 0);
+                transition: all ease-in-out .3s;
+                will-change: transform;
             }
 
         }
@@ -61,11 +67,9 @@ main {
 }
 
 .ready{
-    .logo-wrapper.center {
-        display: none;
-    }
     .logo-wrapper.top {
         .logo{
+            transform: translate3d(15%, -25%, 0);
             pointer-events: all;
             opacity: 1;
         }

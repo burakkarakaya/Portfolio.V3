@@ -29,7 +29,7 @@ new Events((obj) => {
             break;
 
         case EVENT_TYPES.MOUSE_LEAVE:
-            //layerManagement.adjust();
+            //layerManagement.initializePosition(true);
             break;
 
         default:

@@ -4,17 +4,33 @@
     bottom: 20;
     pointer-events: none;
     opacity: 0;
-    transform: translate3d(22%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    transition: all ease-in-out .3s;
+    filter: invert(.8);
+    will-change: transform;
 
-    a span{
-        color: #FFFFFF;
-        font-weight: 500;
-        line-height: 21px;
+
+    a{
+        span{
+            color: #FFFFFF;
+            font-weight: 500;
+            line-height: 21px;
+        }
+
+        opacity: 1;
+        transition: all ease-in-out .3s;
+
+        &.selected{
+            opacity: .7;
+            pointer-events: none;
+        }
+        
     }
 }
 
 .ready{
     .navigation{
+        transform: translate3d(22%, 0, 0);
         pointer-events: all;
         opacity: 1;
     }

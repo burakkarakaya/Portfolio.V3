@@ -16,7 +16,9 @@ class Events {
     onAdjust(evt) {
         this.handleEvent({ type: EVENT_TYPES.RESIZE, evt: evt });
 
-        clearTimeout(this.timeOutFunctionId);
+        if (this.timeOutFunctionId)
+            clearTimeout(this.timeOutFunctionId);
+        
         this.timeOutFunctionId = setTimeout(() => {
             this.handleEvent({ type: EVENT_TYPES.RESIZE_STOP, evt: evt });
         }, this.duration);
