@@ -34,9 +34,9 @@ class Stage {
         this.title = document.querySelector(this.el.title);
         this.paths = this.title.querySelectorAll(this.el.path);
 
-        this.endAnimStart = false;
-
         this.setScene();
+        this.setMouse();
+        this.addWalls();
 
         this.callback = callback;
     }
@@ -75,7 +75,7 @@ class Stage {
                     friction: 1,
                     restitution: 1,
                     isSleeping: this.letterIsSleeping,
-                   
+
                     collisionFilter: {
                         category: 0x0004
                     },
@@ -144,7 +144,6 @@ class Stage {
                 },
                 render: {
                     visible: false,
-                    //fillStyle: '#000'
                 }
             }
         );
@@ -153,7 +152,7 @@ class Stage {
 
     addWalls() {
 
-        this.setWall({ dir: 'top',  });
+        this.setWall({ dir: 'top', });
         this.setWall({ dir: 'left' });
         this.setWall({ dir: 'right' });
         this.setWall({ dir: 'bottom' });
@@ -186,21 +185,20 @@ class Stage {
         this.runner = Matter.Runner.create();
         Matter.Runner.run(this.runner, this.engine);
 
-        // tüm harfler sahne dışına çıktığında tetiklenecek 
-        /*const _self = this;
+        const _self = this;
         Matter.Events.on(this.engine, 'afterUpdate', (evt)=>{
+            
+            const _h = helper.elementHeight(_self.title); 
 
-            if (_self.endAnimStart){
-                const _h = helper.elementHeight(_self.title); 
-                const b = _self.letters.every((k)=>k.position.y >= (window.innerHeight + _h));
-                if (b){
-                    _self.endAnimStart = false;
-
-                    _self.dispatchEvent({ type: EVENT_TYPES.ANIMATION_END });
-                    
+            for (var i = _self.letters.length - 1; i >= 0; i--) {
+                var letter = _self.letters[i];
+                if (letter.position.y >= (window.innerHeight + _h)) {
+                    Matter.Composite.remove(this.world, letter);
+                    _self.letters.splice(i, 1);
                 }
             }
-        });*/
+
+        });
     }
 
     setMouse() {
@@ -227,6 +225,7 @@ class Stage {
         this.canvas.width = wt;
         this.canvas.height = ht;
 
+        /*
         Matter.Composite.clear(this.world);
         Matter.Events.off(this.engine);
 
@@ -234,11 +233,16 @@ class Stage {
         this.addWalls();
         this.addLetters();
         this.startAnim();
+
+        */
+
+        this.clearScene();
+        this.updateWall();
+        this.addLetters();
+        this.startAnim();
     }
 
     init() {
-        this.setMouse();
-        this.addWalls();
         this.addLetters();
     }
 
@@ -252,8 +256,25 @@ class Stage {
         this.render.textures = {};
     }
 
+    clearScene(){
+        for (var i = this.letters.length - 1; i >= 0; i--) {
+            var letter = this.letters[i];
+            Matter.Composite.remove(this.world, letter);
+            this.letters.splice(i, 1);
+        }
+    }
+
+    updateWall(){
+        Object.entries(this.walls).forEach(([key, value]) => {
+
+            const pos = this.getWallPos({ direction: key });
+            Matter.Body.setPosition(value, { x: pos.x, y: pos.y });
+            //Matter.Body.setSize(value, pos.width, pos.height);
+        });
+    }
+
     //
-    updateProp(options, originalSize, svgFileSrc){
+    updateProp(options, originalSize, svgFileSrc) {
         this.options = options;
         this.lettersOrginalSize = originalSize;
         this.svgFileSrc = svgFileSrc;
@@ -262,7 +283,7 @@ class Stage {
         this.title = document.querySelector(this.el.title);
         this.paths = this.title.querySelectorAll(this.el.path);
     }
-    
+
     // animation
     startAnim() {
         const n = this.letters.length;
@@ -277,18 +298,15 @@ class Stage {
         }
     }
 
-    endAnim(){
-
-        this.endAnimStart = true;
-
-        Matter.Body.set(this.walls['bottom'], 'isStatic', false);
-
-        Matter.Body.set(this.walls['bottom'], 'position', { y: window.innerHeight * 2 });
+    endAnim() {
 
         for (var i = 0; i < this.letters.length; ++i) {
             var letter = this.letters[i];
-            Matter.Body.applyForce(letter, { x: letter.position.x, y: letter.position.y }, { x: 0, y: -0.01 });
+            Matter.Body.set(letter, 'isSensor', true);
         }
+
+        Matter.Composite.rebase(this.world);
+
     }
 }
 

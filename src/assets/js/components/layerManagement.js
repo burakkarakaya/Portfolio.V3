@@ -19,10 +19,19 @@ class LayerManagement {
         this._activeted = false;
         this.adjust();
 
+        //
+        this.docBody = document.body;
+        this.cls = {
+            deActive: 'de-active',
+            isActive: 'is-active',
+            ready: 'ready',
+            backToHomeAnimate: 'back-to-home-animate'
+        };
+
         // Bind event handlers in the constructor
-        this.handleMouseEnter = this.handleMouseEnter.bind(this);
-        this.handleMouseLeave = this.handleMouseLeave.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleLayerMouseEnter = this.handleLayerMouseEnter.bind(this);
+        this.handleLayerMouseLeave = this.handleLayerMouseLeave.bind(this);
+        this.handleLayerClick = this.handleLayerClick.bind(this);
         this.layerCallback = this.layerCallback.bind(this);
         this.logoCallback = this.logoCallback.bind(this);
         this.navigationCallback = this.navigationCallback.bind(this);
@@ -41,26 +50,26 @@ class LayerManagement {
     }
 
     //
-    handleMouseEnter(evt) {
+    handleLayerMouseEnter(evt) {
         if (this._activeted) {
             const target = evt.currentTarget;
             this.ID.setAttribute('rel', target.getAttribute('rel') || '');
         }
     }
 
-    handleMouseLeave() {
+    handleLayerMouseLeave() {
         if (this._activeted) {
             this.ID.removeAttribute('rel');
         }
     }
 
-    handleClick(evt) {
+    handleLayerClick(evt) {
         if (this._activeted) {
             const target = evt.currentTarget;
             const sib = helper.getSiblings(target);
 
-            sib.forEach((element) => element.classList.add('de-active'));
-            target.classList.add('is-active');
+            sib.forEach((element) => element.classList.add(this.cls.deActive));
+            target.classList.add(this.cls.isActive);
             this.ID.setAttribute('rel', target.getAttribute('rel') || '');
 
             this._activeted = false;
@@ -90,55 +99,67 @@ class LayerManagement {
 
             setTimeout(() => {
                 this.stage.startAnim();
-                document.body.classList.add('ready');
+                this.docBody.classList.add(this.cls.ready);
             }, 111);
         });
     }
 
     async backToReturn() {
-        if (this.stage) {
-            this.stage.endAnim();
+
+        if (!helper.hasClass({ element: this.docBody, value: this.cls.backToHomeAnimate })) {
+
+            this.docBody.classList.add(this.cls.backToHomeAnimate);
+
+            if (this.stage) {
+                this.stage.endAnim();
+            }
+
+            await helper.delay(1000);
+
+            this.intro.animate(false);
+
+            this.docBody.classList.remove(this.cls.ready);
+            document.querySelectorAll(`.${this.cls.deActive}, .${this.cls.isActive}`).forEach((element) => element.classList.remove(this.cls.deActive, this.cls.isActive));
+
+            await helper.delay(100);
+
+            this.intro.animate(true);
+
+            await helper.delay(2000);
+
+            if (this.stage) {
+                this.stage.clearScene();
+            }
+
+            document.querySelector('main').removeAttribute('rel');
+            this.docBody.classList.remove(this.cls.backToHomeAnimate);
+            this._activeted = true;
+
         }
-
-        await helper.delay(1000);
-
-        this.intro.animate(false);
-
-        document.body.classList.remove('ready');
-        document.querySelectorAll('.de-active, .is-active').forEach((element) => element.classList.remove('de-active', 'is-active'));
-
-        await helper.delay(100);
-
-        this.intro.animate(true);
-
-        await helper.delay(2000);
-
-        document.querySelector('main').removeAttribute('rel');
-        this._activeted = true;
     }
 
     async newStage(activeRel) {
         if (this.stage) {
             this.stage.endAnim();
         }
-        
 
-        await helper.delay(1000);
+        //await helper.delay(1000);
 
         const target = document.querySelector(`section[rel="${activeRel}"]`);
         const sib = helper.getSiblings(target);
 
         sib.forEach((element) => {
-            element.classList.add('de-active');
-            element.classList.remove('is-active');
+            element.classList.add(this.cls.deActive);
+            element.classList.remove(this.cls.isActive);
         });
 
-        target.classList.remove('de-active');
-        target.classList.add('is-active');
+        target.classList.remove(this.cls.deActive);
+        target.classList.add(this.cls.isActive);
 
         this.ID.setAttribute('rel', target.getAttribute('rel') || '');
 
         this.loadStage(activeRel);
+
     }
 
     layerCallback(obj) {
@@ -147,13 +168,13 @@ class LayerManagement {
 
             switch (obj.type) {
                 case EVENT_TYPES.MOUSE_ENTER:
-                    this.handleMouseEnter(evt);
+                    this.handleLayerMouseEnter(evt);
                     break;
                 case EVENT_TYPES.MOUSE_LEAVE:
-                    this.handleMouseLeave();
+                    this.handleLayerMouseLeave();
                     break;
                 case EVENT_TYPES.CLICK:
-                    this.handleClick(evt);
+                    this.handleLayerClick(evt);
                     break;
                 default:
                     break;
@@ -193,7 +214,7 @@ class LayerManagement {
         this.initializePosition(false);
     }
 
-    initializePosition( animated = false ) {
+    initializePosition(animated = false) {
         this.windowDimensions = helper.getWindowSize();
         this.layers.forEach((layer) => layer.initializePosition(animated));
         this.logo.initializePosition(animated);

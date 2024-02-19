@@ -6,11 +6,13 @@
     height: 100%;
     z-index: 101;
     pointer-events: none;
+    opacity: 0;
 }
 
 .ready{
     .stage{
         pointer-events: all;
+        opacity: 1;
     }
     
     .slogan,

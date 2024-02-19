@@ -154,3 +154,12 @@ export function loadImage(url) {
         img.onerror = reject;
     });
 }
+
+export function hasClass (o) {
+    o = o || {};
+    var elm = o['element'] || {},
+        classList = elm.classList || '', // classList
+        value = (o['value'] || '').replace(/\./g, ''); // içerisinde bakilacak class
+
+    return classList.contains(value) || false;
+}
