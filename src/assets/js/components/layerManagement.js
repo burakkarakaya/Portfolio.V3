@@ -6,6 +6,7 @@ import Layer from './layer';
 import Logo from './logo';
 import Intro from './intro';
 import Navigation from './navigation';
+import Content from '@root/templates/content';
 
 class LayerManagement {
     constructor(ID, options) {
@@ -16,6 +17,7 @@ class LayerManagement {
         this.logo = new Logo(this.logoCallback.bind(this));
         this.intro = new Intro();
         this.navigation = new Navigation(this.navigationCallback.bind(this));
+        this.content = new Content();
         this._activeted = false;
         this.adjust();
 
@@ -93,12 +95,14 @@ class LayerManagement {
                 });
             } else {
                 this.stage.updateProp(activeSectionOptions, originalSize, activeSvgFileSrc);
+                this.stage.reset();
             }
 
             this.stage.init();
 
             setTimeout(() => {
                 this.stage.startAnim();
+                activeSectionOptions.content ? this.content.generate(activeSectionOptions.content) : this.content.reset();
                 this.docBody.classList.add(this.cls.ready);
             }, 111);
         });
@@ -128,7 +132,7 @@ class LayerManagement {
             await helper.delay(2000);
 
             if (this.stage) {
-                this.stage.clearScene();
+                this.stage.clearLetters();
             }
 
             document.querySelector('main').removeAttribute('rel');
@@ -226,7 +230,8 @@ class LayerManagement {
 
     mouseMove(evt) {
         if (this._activeted) {
-            const obj = { ...this.windowDimensions, ...helper.getMousePos(evt) };
+            //const obj = { ...this.windowDimensions, ...helper.getMousePos(evt) };
+            const obj = { ...this.windowDimensions, ...evt };
             this.layers.forEach((layer) => layer.mouseMove(obj));
             this.logo.mouseMove(obj);
         }

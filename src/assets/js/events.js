@@ -1,3 +1,4 @@
+import * as helper from '@root/utils/helper';
 import { EVENT_TYPES } from '@root/enums';
 
 class Events {
@@ -5,6 +6,10 @@ class Events {
         this.callback = callback;
         this.timeOutFunctionId;
         this.duration = 555;
+        
+        const windowDimensions = helper.getWindowSize();
+        this._mousePosition = { x: windowDimensions.centerX, y: windowDimensions.centerY };
+        this.reAnimate = this.reAnimate.bind(this);
     }
 
     handleEvent({ type, evt }) {
@@ -24,8 +29,14 @@ class Events {
         }, this.duration);
     }
 
+    reAnimate(){
+        this.handleEvent({ type: EVENT_TYPES.MOUSE_MOVE, evt: this._mousePosition });
+        window.requestAnimationFrame(this.reAnimate);
+    }
+
     onMouseMove(evt) {
-        this.handleEvent({ type: EVENT_TYPES.MOUSE_MOVE, evt: evt });
+        this._mousePosition = helper.getMousePos(evt);
+        //this.handleEvent({ type: EVENT_TYPES.MOUSE_MOVE, evt: evt });
     }
 
     onMouseEnter(evt) {
@@ -53,7 +64,8 @@ class Events {
     init() {
         this.addEventListeners();
         this.onAdjust(new Event('resize'));
-        this.onMouseMove(new Event('mousemove'));
+        this.reAnimate();
+        //this.onMouseMove(new Event('mousemove'));
     }
 
     destroy() {

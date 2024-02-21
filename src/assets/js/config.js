@@ -66,33 +66,203 @@ const config = [
             data: [
 
                 {
-
-
-                    year: 2016,
-
-                    name: 'Nike Geç kendini',
-
+                    name: 'Nike Geç Kendini',
                     link: 'http://nike.lidyana.com',
-
-                    client: 'lidyana',
-
                     agency: 'minus99',
-
-                    media: '',
-
-                    awwards: [
-
+                    technologies: ['CreateJS', 'JQuery', 'HTML5', 'CSS3'],
+                    media: [],
+                    type: 'Web',
+                    awards: [
                         {
                             ico: 'awwwards',
                             link: 'www.awwards.com/nikelidyana.com',
                             title: 'Site of the day'
+                        },
+                        {
+                            ico: 'cssdesignawards',
+                            link: 'www.cssdesignawards.com/nikelidyana.com',
+                            title: 'Best User Interface'
                         }
-
-                    ]
-
-
-                }
-
+                    ],
+                    description: ''
+                },
+            
+                {
+                    name: 'Vakko Özeldikim',
+                    link: 'https://ozeldikim.vakko.com',
+                    agency: 'minus99',
+                    technologies: ['Canvas', 'JQuery', 'HTML5', 'CSS3'],
+                    media: [],
+                    type: 'Web',
+                    awards: [
+                        {
+                            ico: 'awwwards',
+                            link: 'www.awwards.com/nikelidyana.com',
+                            title: 'Site of the day'
+                        },
+                        {
+                            ico: 'cssdesignawards',
+                            link: 'www.cssdesignawards.com/nikelidyana.com',
+                            title: 'Best User Interface'
+                        }
+                    ],
+                    description: ''
+                },
+            
+                {
+                    name: 'Flormar Mobile App',
+                    link: 'javascript:void(0);',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'React Native'],
+                    media: [],
+                    type: 'App',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Cosmetica Mobile App',
+                    link: 'javascript:void(0);',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'React Native'],
+                    media: [],
+                    type: 'App',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'VitrA',
+                    link: 'https://www.vitra.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Newbalance',
+                    link: 'https://www.newbalance.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Kartalyuvasi',
+                    link: 'https://www.kartalyuvasi.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Korayspor',
+                    link: 'https://www.korayspor.com/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Monsternotebook',
+                    link: 'https://www.monsternotebook.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Lescon',
+                    link: 'https://www.lescon.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Unibaby',
+                    link: 'https://www.unibaby.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'E-Sanalmagaza',
+                    link: 'https://www.e-sanalmagaza.com/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Machka',
+                    link: 'https://www.machka.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Twist',
+                    link: 'https://www.twist.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'İpekyol',
+                    link: 'https://www.ipekyol.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
+                {
+                    name: 'Ok',
+                    link: 'https://www.ok.com.tr/',
+                    agency: 'proj-e',
+                    technologies: ['CMS', 'C#', 'Razor', 'Pure JS'],
+                    media: [],
+                    type: 'Web',
+                    awards: [],
+                    description: ''
+                },
+            
             ]
         }
     },
@@ -145,6 +315,75 @@ const config = [
                     key: 's',
                     path: 'M 452.1 84.15 L 441.9 86.7 A 14.896 14.896 0 0 0 441.898 86.933 C 441.898 95.399 449.049 107.422 466.666 110.14 A 50.057 50.057 0 0 0 474.3 110.7 A 45.563 45.563 0 0 0 484.82 109.557 C 498.27 106.367 504.292 96.978 504.59 87.589 A 23.175 23.175 0 0 0 504.6 87.15 A 23.581 23.581 0 0 0 504.602 86.818 C 504.602 77.962 499.597 69.473 488.201 65.851 A 38.292 38.292 0 0 0 481.05 64.35 L 465.15 62.55 C 458.85 61.8 454.95 58.2 454.95 52.5 A 7.162 7.162 0 0 1 455.186 50.702 C 456.527 45.526 463.503 40.35 473.85 40.35 A 25.856 25.856 0 0 1 478.862 40.807 C 488.488 42.709 491.031 50.116 491.55 55.05 L 501.15 53.1 A 15.27 15.27 0 0 0 500.925 50.618 C 499.783 43.799 493.875 31.65 473.85 31.65 A 41.852 41.852 0 0 0 464.315 32.693 C 451.78 35.622 445.37 44.186 444.665 51.465 A 13.86 13.86 0 0 0 444.6 52.8 A 21.667 21.667 0 0 0 445.624 59.564 C 448.396 68.05 456.258 72.022 462.45 72.75 L 478.2 74.55 A 33.251 33.251 0 0 1 486.446 76.331 C 490.072 77.733 492.775 80.075 493.564 84.118 A 13.461 13.461 0 0 1 493.8 86.7 A 12.495 12.495 0 0 1 486.322 98.495 C 483.243 99.999 479.287 100.8 474.6 100.8 C 461.028 100.8 453.971 94.159 452.399 86.375 A 17.224 17.224 0 0 1 452.1 84.15 Z'
                 }
+            ]
+        },
+        content: {
+            type: 'list',
+            data: [
+
+                {
+                    name: 'Nike Geç Kendini',
+                    link: 'http://nike.lidyana.com',
+                    agency: 'minus99',
+                    technologies: ['CreateJS', 'JQuery', 'HTML5', 'CSS3'],
+                    media: [],
+                    type: 'Web',
+                    awards: [
+                        {
+                            ico: 'awwwards',
+                            link: 'www.awwards.com/nikelidyana.com',
+                            title: 'Site of the day'
+                        },
+                        {
+                            ico: 'cssdesignawards',
+                            link: 'www.cssdesignawards.com/nikelidyana.com',
+                            title: 'Best User Interface'
+                        }
+                    ],
+                    description: ''
+                },
+            
+                {
+                    name: 'Vakko Özeldikim',
+                    link: 'https://ozeldikim.vakko.com',
+                    agency: 'minus99',
+                    technologies: ['Canvas', 'JQuery', 'HTML5', 'CSS3'],
+                    media: [],
+                    type: 'Web',
+                    awards: [
+                        {
+                            ico: 'awwwards',
+                            link: 'www.awwards.com/nikelidyana.com',
+                            title: 'Site of the day'
+                        },
+                        {
+                            ico: 'cssdesignawards',
+                            link: 'www.cssdesignawards.com/nikelidyana.com',
+                            title: 'Best User Interface'
+                        }
+                    ],
+                    description: ''
+                },
+
+                {
+                    name: 'Ramsey',
+                    link: 'https://www.ramsey.com.tr',
+                    agency: 'minus99',
+                    technologies: ['Flash', 'Actionscript 3.0'],
+                    media: [],
+                    type: 'Web',
+                    awards: [
+                        {
+                            ico: 'designlicks',
+                            link: 'www.designlicks.com/ramsey',
+                            title: 'Site of the day'
+                        }
+                    ],
+                    description: ''
+                },
+            
+                
+            
             ]
         }
     },

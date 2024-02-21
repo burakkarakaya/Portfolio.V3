@@ -1,0 +1,72 @@
+.ready .contents {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.contents {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 105;
+    width: 60%;
+    padding-top: 130px;
+    height: 100vh;
+    overflow: auto;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+    padding-right: 15px;
+
+    .list{
+
+        li.title span {
+            font-family: Technique-Sans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #000;
+            padding-bottom: 50px;
+        }
+
+        li:not(.title) {
+            border-top: 1px solid #000;
+
+            span {
+                font-family: Technique-Sans;
+                font-size: 22px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: italic;
+                letter-spacing: normal;
+                color: #000;
+                line-height: 79px;
+            }
+        }
+
+        li {
+            display: flex;
+            cursor: pointer;
+
+            span.name{
+                width: 40%;
+            }
+
+            span.technologies{
+                width: 40%;
+            }
+
+            span.type{
+                width: 10%;
+            }
+
+            span.agency{
+                width: 10%;
+            }
+        }
+
+    }
+
+}

@@ -9,9 +9,13 @@ const EVENT_TYPES = {
 };
 
 const ANIMATION = {
-    SPEED_X: 0.1,
-    SPEED_Y: 0.3,
-    EASE: 'sine.out'
+    SPEED_X: 0.3,
+    SPEED_Y: 0.4,
+    EASE: 'none'
 };
 
-export {EVENT_TYPES, ANIMATION};
+const CONTENT_TYPE = {
+    list: 'list'
+};
+
+export {EVENT_TYPES, ANIMATION, CONTENT_TYPE};

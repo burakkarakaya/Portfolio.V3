@@ -1,3 +1,5 @@
+import Content from './content';
+
 class SvgGenerator {
     constructor({ fill, width, height, letters }) {
         this.fill = fill;

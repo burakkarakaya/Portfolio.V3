@@ -7,38 +7,62 @@ class Stage {
         this.lettersOrginalSize = originalSize;
         this.svgFileSrc = svgFileSrc;
 
+        //
         this.engine = null;
         this.world = null;
         this.render = null;
         this.mouseConstraint = null;
         this.content = null;
-        this.el = {
-            canvas: '.stage',
-            title: '.is-active svg.letters',
-            path: 'path',
-            content: '.sidebar'
-        };
-        this.cls = {
-            ready: 'ready'
-        };
+
+        //
+        this.letterIsSleeping = true;
+        this.letters = [];
         this.walls = {
             left: null,
             top: null,
             bottom: null,
             right: null,
         };
-        this.letterIsSleeping = true;
-        this.letters = [];
 
+        //
+        this.el = {
+            canvas: '.stage',
+            title: '.is-active svg.letters',
+            path: 'path',
+            content: '.sidebar'
+        };
+
+        this.cls = {
+            ready: 'ready'
+        };
+
+        // DOM Elements
         this.canvas = document.querySelector(this.el.canvas);
         this.title = document.querySelector(this.el.title);
         this.paths = this.title.querySelectorAll(this.el.path);
 
+        // Set Stage
         this.setScene();
+        this.addEvents();
         this.setMouse();
         this.addWalls();
 
+        // callback
         this.callback = callback;
+    }
+
+    updateProp(options, originalSize, svgFileSrc) {
+        this.options = options;
+        this.lettersOrginalSize = originalSize;
+        this.svgFileSrc = svgFileSrc;
+
+        this.canvas = document.querySelector(this.el.canvas);
+        this.title = document.querySelector(this.el.title);
+        this.paths = this.title.querySelectorAll(this.el.path);
+    }
+
+    init() {
+        this.addLetters();
     }
 
     dispatchEvent({ type }) {
@@ -47,53 +71,72 @@ class Stage {
         }
     }
 
-    addLetters() {
-        for (let i = 0; i < this.paths.length; ++i) {
-            const path = this.paths[i];
-            const letter = path.dataset.letter;
-            const bounding = path.getBoundingClientRect();
-            const fileSrc = this.svgFileSrc[letter];
+    // Set Scene
+    setScene() {
 
-            let xScale = 1;
-            let yScale = 1;
+        this.engine = Matter.Engine.create({
+            enableSleeping: true
+        });
 
-            if (this.lettersOrginalSize[letter]) {
-                xScale = bounding.width / this.lettersOrginalSize[letter].width;
-                yScale = bounding.height / this.lettersOrginalSize[letter].height;
+        this.world = this.engine.world;
+
+        this.render = Matter.Render.create({
+            element: document.body,
+            engine: this.engine,
+            canvas: this.canvas,
+            options: {
+                background: 'transparent',
+                width: window.innerWidth,
+                height: window.innerHeight,
+                showAngleIndicator: false,
+                showSleeping: false,
+                wireframes: false
             }
+        });
 
-            const _x = bounding.left + bounding.width / 2;
+        Matter.Render.run(this.render);
 
-            const _y = bounding.top + bounding.height / 2;
-
-            const _width = bounding.width;
-
-            const _height = bounding.height + 20;
-
-            const rectangle = Matter.Bodies.rectangle(_x, _y, _width, _height,
-                {
-                    friction: 1,
-                    restitution: 1,
-                    isSleeping: this.letterIsSleeping,
-
-                    collisionFilter: {
-                        category: 0x0004
-                    },
-                    render: {
-                        sprite: {
-                            texture: fileSrc,
-                            xScale: xScale,
-                            yScale: yScale
-                        }
-                    }
-                }
-            );
-
-            Matter.Composite.add(this.world, rectangle);
-            this.letters.push(rectangle);
-        }
+        this.runner = Matter.Runner.create();
+        Matter.Runner.run(this.runner, this.engine);
     }
 
+    // Add Events
+    addEvents() {
+        const _self = this;
+        Matter.Events.on(this.engine, 'afterUpdate', (evt) => {
+
+            const _h = helper.elementHeight(_self.title);
+
+            for (var i = _self.letters.length - 1; i >= 0; i--) {
+                var letter = _self.letters[i];
+                if (letter.position.y >= (window.innerHeight + _h)) {
+                    Matter.Composite.remove(this.world, letter);
+                    _self.letters.splice(i, 1);
+                }
+            }
+
+        });
+    }
+
+    // Set Mouse
+    setMouse() {
+        this.mouse = Matter.Mouse.create(this.render.canvas);
+        this.mouseConstraint = Matter.MouseConstraint.create(this.engine, {
+            mouse: this.mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+        Matter.Composite.add(this.world, this.mouseConstraint);
+        this.render.mouse = this.mouse;
+        this.mouseConstraint.collisionFilter.mask = 0x0004 | 0x0008;
+    }
+
+    // Walls
     getWallPos(o) {
         o = o || {};
         const wt = window.innerWidth;
@@ -158,66 +201,75 @@ class Stage {
         this.setWall({ dir: 'bottom' });
     }
 
-    setScene() {
-
-        this.engine = Matter.Engine.create({
-            enableSleeping: true
+    updateWalls() {
+        
+        Object.entries(this.walls).forEach(([key, wall]) => {
+            const pos = this.getWallPos({ direction: key });
+            Matter.Body.set(wall, 'width', pos.width);
+            Matter.Body.set(wall, 'height', pos.height);
+            Matter.Body.setPosition(wall, { x: pos.x, y: pos.y });
         });
-
-        this.world = this.engine.world;
-
-        this.render = Matter.Render.create({
-            element: document.body,
-            engine: this.engine,
-            canvas: this.canvas,
-            options: {
-                background: 'transparent',
-                width: window.innerWidth,
-                height: window.innerHeight,
-                showAngleIndicator: false,
-                showSleeping: false,
-                wireframes: false
-            }
-        });
-
-        Matter.Render.run(this.render);
-
-        this.runner = Matter.Runner.create();
-        Matter.Runner.run(this.runner, this.engine);
-
-        const _self = this;
-        Matter.Events.on(this.engine, 'afterUpdate', (evt)=>{
-            
-            const _h = helper.elementHeight(_self.title); 
-
-            for (var i = _self.letters.length - 1; i >= 0; i--) {
-                var letter = _self.letters[i];
-                if (letter.position.y >= (window.innerHeight + _h)) {
-                    Matter.Composite.remove(this.world, letter);
-                    _self.letters.splice(i, 1);
-                }
-            }
-
-        });
+        
     }
 
-    setMouse() {
-        this.mouse = Matter.Mouse.create(this.render.canvas);
-        this.mouseConstraint = Matter.MouseConstraint.create(this.engine, {
-            mouse: this.mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: {
-                    visible: false
-                }
-            }
-        });
+    // Letters
+    addLetters() {
+        for (let i = 0; i < this.paths.length; ++i) {
+            const path = this.paths[i];
+            const letter = path.dataset.letter;
+            const bounding = path.getBoundingClientRect();
+            const fileSrc = this.svgFileSrc[letter];
 
-        Matter.Composite.add(this.world, this.mouseConstraint);
-        this.render.mouse = this.mouse;
-        this.mouseConstraint.collisionFilter.mask = 0x0004 | 0x0008;
+            let xScale = 1;
+            let yScale = 1;
+
+            if (this.lettersOrginalSize[letter]) {
+                xScale = bounding.width / this.lettersOrginalSize[letter].width;
+                yScale = bounding.height / this.lettersOrginalSize[letter].height;
+            }
+
+            const _x = bounding.left + bounding.width / 2;
+
+            const _y = bounding.top + bounding.height / 2;
+
+            const _width = bounding.width;
+
+            const _height = bounding.height + 20;
+
+            const rectangle = Matter.Bodies.rectangle(_x, _y, _width, _height,
+                {
+                    friction: 1,
+                    restitution: 1,
+                    isSleeping: this.letterIsSleeping,
+
+                    collisionFilter: {
+                        category: 0x0004
+                    },
+                    render: {
+                        sprite: {
+                            texture: fileSrc,
+                            xScale: xScale,
+                            yScale: yScale
+                        }
+                    }
+                }
+            );
+
+            Matter.Composite.add(this.world, rectangle);
+
+            this.letters.push(rectangle);
+        }
     }
 
+    clearLetters() {
+        for (var i = this.letters.length - 1; i >= 0; i--) {
+            var letter = this.letters[i];
+            Matter.Composite.remove(this.world, letter);
+            this.letters.splice(i, 1);
+        }
+    }
+
+    //
     adjust() {
         const wt = window.innerWidth;
         const ht = window.innerHeight;
@@ -235,15 +287,11 @@ class Stage {
         this.startAnim();
 
         */
-
-        this.clearScene();
-        this.updateWall();
+        
+        this.clearLetters();
+        this.updateWalls();
         this.addLetters();
         this.startAnim();
-    }
-
-    init() {
-        this.addLetters();
     }
 
     destroy() {
@@ -256,32 +304,14 @@ class Stage {
         this.render.textures = {};
     }
 
-    clearScene(){
-        for (var i = this.letters.length - 1; i >= 0; i--) {
-            var letter = this.letters[i];
-            Matter.Composite.remove(this.world, letter);
-            this.letters.splice(i, 1);
-        }
-    }
+    reset(){
+        const wt = window.innerWidth;
+        const ht = window.innerHeight;
 
-    updateWall(){
-        Object.entries(this.walls).forEach(([key, value]) => {
+        this.canvas.width = wt;
+        this.canvas.height = ht;
 
-            const pos = this.getWallPos({ direction: key });
-            Matter.Body.setPosition(value, { x: pos.x, y: pos.y });
-            //Matter.Body.setSize(value, pos.width, pos.height);
-        });
-    }
-
-    //
-    updateProp(options, originalSize, svgFileSrc) {
-        this.options = options;
-        this.lettersOrginalSize = originalSize;
-        this.svgFileSrc = svgFileSrc;
-
-        this.canvas = document.querySelector(this.el.canvas);
-        this.title = document.querySelector(this.el.title);
-        this.paths = this.title.querySelectorAll(this.el.path);
+        this.updateWalls();
     }
 
     // animation
@@ -291,10 +321,7 @@ class Stage {
 
         for (let i = 0; i < n; ++i) {
             const letter = this.letters[i];
-            const pos = (i <= c ? -.9 : .7) * (i * .1);
-
             Matter.Body.set(letter, "isSleeping", false);
-            //Matter.Body.applyForce(letter, { x: letter.position.x, y: letter.position.y }, { x: pos, y: 0 });
         }
     }
 

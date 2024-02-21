@@ -16,7 +16,7 @@ class TemplateManagement{
         const logoCenter = new Logo({ cls: 'center' }).generate();
         const logoTop = new Logo({ cls: 'top' }).generate();
 
-        this.ID.innerHTML = `${sections.join('')}${buttons.join('')}${logoTop}<ul class="navigation">${navigation.join('')}</ul>${logoCenter}<span class="intro"></span><canvas class="stage"></canvas>`;
+        this.ID.innerHTML = `${sections.join('')}${buttons.join('')}${logoTop}<ul class="navigation">${navigation.join('')}</ul>${logoCenter}<span class="intro"></span><div class="contents"></div><canvas class="stage"></canvas>`;
     }
 }
 
