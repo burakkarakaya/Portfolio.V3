@@ -1,9 +1,9 @@
-import fileSrc from '@images/**/*.png';
 import * as helper from '@root/utils/helper';
 
 class AssetsLoader{
-    constructor(callback){
+    constructor(fileSrc, callback){
         this.callback = callback;
+        this.fileSrc = fileSrc;
         this.init();
     }
 
@@ -20,7 +20,7 @@ class AssetsLoader{
 
     init(){
         this
-        .loadAll(fileSrc)
+        .loadAll(this.fileSrc)
         .then((files)=>{
             this.dispatcher({ type: 'success', data: files });
         })

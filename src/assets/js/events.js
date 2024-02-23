@@ -6,6 +6,8 @@ class Events {
         this.callback = callback;
         this.timeOutFunctionId;
         this.duration = 555;
+
+        this.throttledMouseMove = helper.throttle(this.onMouseMove.bind(this), 16);
         
         const windowDimensions = helper.getWindowSize();
         this._mousePosition = { x: windowDimensions.centerX, y: windowDimensions.centerY };
@@ -44,19 +46,21 @@ class Events {
     }
 
     onMouseLeave(evt) {
+        const windowDimensions = helper.getWindowSize();
+        this._mousePosition = { x: windowDimensions.centerX, y: windowDimensions.centerY };
         this.handleEvent({ type: EVENT_TYPES.MOUSE_LEAVE, evt: evt });
     }
 
     addEventListeners() {
         window.addEventListener('resize', this.onAdjust.bind(this), false);
-        document.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+        document.addEventListener('mousemove', this.throttledMouseMove, false);
         document.addEventListener('mouseenter', this.onMouseEnter.bind(this), false);
         document.addEventListener('mouseleave', this.onMouseLeave.bind(this), false);
     }
 
     removeEventListeners() {
         window.removeEventListener('resize', this.onAdjust.bind(this), false);
-        document.removeEventListener('mousemove', this.onMouseMove.bind(this), false);
+        document.removeEventListener('mousemove', this.throttledMouseMove, false);
         document.removeEventListener('mouseenter', this.onMouseEnter.bind(this), false);
         document.removeEventListener('mouseleave', this.onMouseLeave.bind(this), false);
     }

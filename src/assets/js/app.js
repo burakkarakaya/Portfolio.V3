@@ -1,3 +1,8 @@
+import * as helper from '@root/utils/helper';
+
+import pngFileSrc from '@images/**/*.png';
+import svgFileSrc from '@svg/**/*.svg';
+
 import config from '@root/config';
 
 import { EVENT_TYPES } from '@root/enums';
@@ -37,8 +42,8 @@ new Events((obj) => {
     }
 }).init();
 
-
-new AssetsLoader(({ type, data }) => {
+new AssetsLoader({...pngFileSrc, ...helper.flattenObject(svgFileSrc.sections
+    )}, ({ type, data }) => {
     if (type == 'success') {
         layerManagement.starting();
     }

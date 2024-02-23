@@ -69,12 +69,20 @@ main {
         }
 
         &[rel="projects"] {
+            @include utils.clipPath(55%, 2);
+            > i{
+                @include utils.clipPath(55%, 2);
+            }
             svg.letters {
                 transform: translate3d(0, -38%, 0);
             }
         }
 
         &[rel="awards"] {
+            @include utils.clipPath(44%, 3);
+            > i{
+                @include utils.clipPath(44%, 3);
+            }
             svg.letters {
                 max-width: 68%;
                 transform: translate3d(0, -49%, 0);
@@ -82,6 +90,12 @@ main {
         }
 
         &[rel="skills"] {
+            @include utils.clipPath(33%, 4);
+
+            > i{
+                @include utils.clipPath(33%, 4);
+            }
+
             svg.letters {
                 max-width: 45%;
                 transform: translate3d(0, -50%, 0);
@@ -89,6 +103,12 @@ main {
         }
 
         &[rel="contact"] {
+            @include utils.clipPath(22%, 5);
+
+            > i{
+                @include utils.clipPath(22%, 5);
+            }
+
             svg.letters {
                 max-width: 73%;
                 transform: translate3d(0, -49%, 0);
@@ -97,6 +117,12 @@ main {
 
         &[rel="center"] {
             pointer-events: none;
+            
+            @include utils.clipPath(11%, 6);
+
+            > i{
+                @include utils.clipPath(11%, 6);
+            }
         }
 
         &.is-active{

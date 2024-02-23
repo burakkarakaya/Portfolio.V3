@@ -9,9 +9,9 @@ const EVENT_TYPES = {
 };
 
 const ANIMATION = {
-    SPEED_X: 0.3,
+    SPEED_X: 0.12,
     SPEED_Y: 0.4,
-    EASE: 'none'
+    EASE: 'sine.out'
 };
 
 const CONTENT_TYPE = {

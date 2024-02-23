@@ -316,10 +316,7 @@ class Stage {
 
     // animation
     startAnim() {
-        const n = this.letters.length;
-        const c = Math.round(n * .5);
-
-        for (let i = 0; i < n; ++i) {
+        for (let i = 0; i < this.letters.length; ++i) {
             const letter = this.letters[i];
             Matter.Body.set(letter, "isSleeping", false);
         }
@@ -329,11 +326,11 @@ class Stage {
 
         for (var i = 0; i < this.letters.length; ++i) {
             var letter = this.letters[i];
+            Matter.Body.set(letter, "isSleeping", false);
             Matter.Body.set(letter, 'isSensor', true);
         }
-
+        
         Matter.Composite.rebase(this.world);
-
     }
 }
 

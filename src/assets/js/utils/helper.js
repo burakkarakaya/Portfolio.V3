@@ -155,7 +155,7 @@ export function loadImage(url) {
     });
 }
 
-export function hasClass (o) {
+export function hasClass(o) {
     o = o || {};
     var elm = o['element'] || {},
         classList = elm.classList || '', // classList
@@ -163,3 +163,29 @@ export function hasClass (o) {
 
     return classList.contains(value) || false;
 }
+
+export function flattenObject(obj, parentKey = '') {
+    return Object.keys(obj).reduce((acc, key) => {
+        const newKey = parentKey ? `${parentKey}${key}` : key;
+
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            Object.assign(acc, flattenObject(obj[key], `${newKey}-`));
+        } else {
+            acc[newKey] = obj[key];
+        }
+
+        return acc;
+    }, {});
+};
+
+
+export function throttle(callback, delay) {
+    let lastTime = 0;
+    return function () {
+      const now = new Date().getTime();
+      if (now - lastTime >= delay) {
+        callback.apply(null, arguments);
+        lastTime = now;
+      }
+    };
+  }

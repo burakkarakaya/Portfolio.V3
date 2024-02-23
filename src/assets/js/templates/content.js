@@ -10,7 +10,36 @@ class Content {
         return '';
     }
 
+    async animateHideListItems() {
+
+        const items = Array.from(this.element.querySelectorAll('.list li'));
+
+        if (items.length > 0) {
+
+            const tl = gsap.timeline({
+                defaults: {
+                    duration: 0.8,
+                    ease: 'power2.out',
+                }
+            });
+
+            tl.to(items, {
+                opacity: 0,
+                y: 20,
+                rotateX: -90, // Initial rotation on the X-axis
+                transformOrigin: '50% 50% -50', // Adjust perspective value
+                stagger: 0.05,
+                onComplete: (index) => {
+                    // Additional actions after each item animation
+                    // You can access the index of the completed item using the 'index' parameter
+                }
+            });
+
+        }
+    }
+
     async animateListItems(items) {
+
         const tl = gsap.timeline({
             defaults: {
                 duration: 0.8,

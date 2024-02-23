@@ -2,7 +2,7 @@ import svgFileSrc from '@svg/**/*.svg';
 import * as helper from '@root/utils/helper';
 import { EVENT_TYPES } from '@root/enums';
 import Stage from './stage';
-import Layer from './layer';
+import Layer from './layer_old';
 import Logo from './logo';
 import Intro from './intro';
 import Navigation from './navigation';
@@ -113,6 +113,10 @@ class LayerManagement {
         if (!helper.hasClass({ element: this.docBody, value: this.cls.backToHomeAnimate })) {
 
             this.docBody.classList.add(this.cls.backToHomeAnimate);
+
+            if (this.content){
+                this.content.animateHideListItems();
+            }
 
             if (this.stage) {
                 this.stage.endAnim();

@@ -10,7 +10,7 @@ class Layer {
         this.distance = layer.distance;
         this.radius = layer.radius;
         this.speed = layer.speed;
-        this.duration = layer.duration * .8;
+        this.duration = layer.duration * .5;
 
         //
         this.buttonPointerWidth = 14;
@@ -18,7 +18,6 @@ class Layer {
         // element
         this.buttonElement = document.querySelector(`button[rel="${key}"]`);
         this.layerElement = document.querySelector(`section[rel="${key}"]`);
-        this.layerElementBorder = this.layerElement.querySelector(`:scope > i`);
         this.addEventListeners();
 
         //
@@ -70,7 +69,7 @@ class Layer {
                 gsap.to(this.buttonElement, {
                     x: px,
                     y: py,
-                    duration: this.duration,
+                    duration: this.duration * .5,
                     ease: ANIMATION.EASE,
                 });
             } else {
@@ -87,24 +86,15 @@ class Layer {
 
             if (animated) {
                 gsap.to(this.layerElement, {
-                    clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
-                    duration: this.duration,
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`,
+                    duration: this.duration * .5,
                     ease: ANIMATION.EASE,
                 });
-
-                gsap.to(this.layerElementBorder, {
-                    clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
-                    duration: this.duration,
-                    ease: ANIMATION.EASE,
-                });
-
             } else {
                 gsap.set(this.layerElement, {
-                    clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
-                });
-
-                gsap.set(this.layerElementBorder, {
-                    clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
+                    "--x": `${newCoorX}%`,
+                    "--y": `${newCoorY}%`
                 });
             }
 
@@ -150,13 +140,8 @@ class Layer {
     animateLayer(newCoorX, newCoorY, maskSize) {
         
         this.layerElement?.style && gsap.to(this.layerElement, {
-            clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
-            duration: this.duration,
-            ease: ANIMATION.EASE,
-        });
-
-        this.layerElementBorder?.style && gsap.to(this.layerElementBorder, {
-            clipPath: `circle(${this.radius}% at ${newCoorX}% ${newCoorY}%)`, 
+            "--x": `${newCoorX}%`,
+            "--y": `${newCoorY}%`,
             duration: this.duration,
             ease: ANIMATION.EASE,
         });
