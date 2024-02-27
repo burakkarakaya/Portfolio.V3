@@ -1,3 +1,5 @@
+import icons from '@assets/icons.svg';
+
 const config = [
 
     {
@@ -74,15 +76,48 @@ const config = [
                     type: 'Web',
                     awards: [
                         {
-                            ico: 'awwwards',
-                            link: 'www.awwards.com/nikelidyana.com',
+                            ico: 'fwa',
+                            link: 'https://thefwa.com/cases/nike-ge-kendini',
                             title: 'Site of the day'
                         },
+
                         {
-                            ico: 'cssdesignawards',
-                            link: 'www.cssdesignawards.com/nikelidyana.com',
-                            title: 'Best User Interface'
+                            ico: 'webby',
+                            link: 'https://winners.webbyawards.com/2016/websites/features-design/best-use-of-video-or-moving-image/161069/nike-ge%C3%A7-kendini',
+                            title: 'Websites and Mobile Sites, Best Use of Video or Moving Image 2016'
+                        },
+
+                        
+                        {
+                            ico: 'awwwards',
+                            link: 'https://www.awwwards.com/sites/nike-gec-kendini-experience',
+                            title: 'Site of the day'
+                        },
+
+                        {
+                            ico: 'altinorumcek',
+                            link: 'https://www.altinorumcek.com/ajanslar/99-design-studio/',
+                            title: 'Site of the day'
+                        },
+
+                        {
+                            ico: 'cssda',
+                            link: 'https://www.cssdesignawards.com/sites/nike-gec-kendini/26711/',
+                            title: ''
+                        },
+
+                        {
+                            ico: 'communicator',
+                            link: '',
+                            title: ''
+                        },
+
+                        {
+                            ico: 'w3',
+                            link: '',
+                            title: ''
                         }
+
                     ],
                     description: ''
                 },
@@ -101,9 +136,9 @@ const config = [
                             title: 'Site of the day'
                         },
                         {
-                            ico: 'cssdesignawards',
-                            link: 'www.cssdesignawards.com/nikelidyana.com',
-                            title: 'Best User Interface'
+                            ico: 'altinorumcek',
+                            link: '',
+                            title: ''
                         }
                     ],
                     description: ''
@@ -330,15 +365,48 @@ const config = [
                     type: 'Web',
                     awards: [
                         {
-                            ico: 'awwwards',
-                            link: 'www.awwards.com/nikelidyana.com',
+                            ico: 'fwa',
+                            link: 'https://thefwa.com/cases/nike-ge-kendini',
                             title: 'Site of the day'
                         },
+
                         {
-                            ico: 'cssdesignawards',
-                            link: 'www.cssdesignawards.com/nikelidyana.com',
-                            title: 'Best User Interface'
+                            ico: 'webby',
+                            link: 'https://winners.webbyawards.com/2016/websites/features-design/best-use-of-video-or-moving-image/161069/nike-ge%C3%A7-kendini',
+                            title: 'Websites and Mobile Sites, Best Use of Video or Moving Image 2016'
+                        },
+
+                        
+                        {
+                            ico: 'awwwards',
+                            link: 'https://www.awwwards.com/sites/nike-gec-kendini-experience',
+                            title: 'Site of the day'
+                        },
+
+                        {
+                            ico: 'altinorumcek',
+                            link: 'https://www.altinorumcek.com/ajanslar/99-design-studio/',
+                            title: 'Site of the day'
+                        },
+
+                        {
+                            ico: 'cssda',
+                            link: 'https://www.cssdesignawards.com/sites/nike-gec-kendini/26711/',
+                            title: ''
+                        },
+
+                        {
+                            ico: 'communicator',
+                            link: '',
+                            title: ''
+                        },
+
+                        {
+                            ico: 'w3',
+                            link: '',
+                            title: ''
                         }
+
                     ],
                     description: ''
                 },
@@ -357,9 +425,9 @@ const config = [
                             title: 'Site of the day'
                         },
                         {
-                            ico: 'cssdesignawards',
-                            link: 'www.cssdesignawards.com/nikelidyana.com',
-                            title: 'Best User Interface'
+                            ico: 'altinorumcek',
+                            link: '',
+                            title: ''
                         }
                     ],
                     description: ''
@@ -437,6 +505,16 @@ const config = [
                     path: 'M 280.521 85.352 L 270.321 87.902 A 14.896 14.896 0 0 0 270.319 88.134 C 270.319 96.601 277.47 108.624 295.086 111.341 A 50.057 50.057 0 0 0 302.721 111.902 A 45.563 45.563 0 0 0 313.24 110.759 C 326.691 107.568 332.713 98.179 333.011 88.791 A 23.175 23.175 0 0 0 333.021 88.352 A 23.581 23.581 0 0 0 333.023 88.02 C 333.023 79.163 328.017 70.675 316.622 67.053 A 38.292 38.292 0 0 0 309.471 65.552 L 293.571 63.752 C 287.271 63.002 283.371 59.402 283.371 53.702 A 7.162 7.162 0 0 1 283.607 51.904 C 284.948 46.728 291.924 41.552 302.271 41.552 A 25.856 25.856 0 0 1 307.283 42.009 C 316.909 43.91 319.451 51.317 319.971 56.252 L 329.571 54.302 A 15.27 15.27 0 0 0 329.346 51.82 C 328.204 45.001 322.295 32.852 302.271 32.852 A 41.852 41.852 0 0 0 292.736 33.895 C 280.201 36.824 273.791 45.388 273.086 52.667 A 13.86 13.86 0 0 0 273.021 54.002 A 21.667 21.667 0 0 0 274.044 60.766 C 276.817 69.252 284.679 73.223 290.871 73.952 L 306.621 75.752 A 33.251 33.251 0 0 1 314.867 77.533 C 318.493 78.935 321.196 81.277 321.985 85.319 A 13.461 13.461 0 0 1 322.221 87.902 A 12.495 12.495 0 0 1 314.743 99.697 C 311.663 101.201 307.708 102.002 303.021 102.002 C 289.449 102.002 282.392 95.361 280.82 87.577 A 17.224 17.224 0 0 1 280.521 85.352 Z'
                 }
             ]
+        },
+        content: {
+            type: 'text',
+            data: `
+            <p class="animated">Hello, I'm Burak Karakaya. I'm an experienced JavaScript Developer and Frontend Team Leader. Throughout my career, I've focused on JavaScript, React Native, and modern web technologies, contributing to the success stories of various brands with technical depth and creative solutions.</p>
+
+            <p class="animated">I've specialized in optimizing user experiences in e-commerce projects, particularly in handling API requests and utilizing pure JavaScript and animation techniques. Leading under the Agile methodology, I stand out for applying my technical knowledge effectively in practice.</p>
+            
+            <p class="animated">By closely following technological advancements, my goal is to offer innovative solutions in projects and overcome future technical challenges. I'm excited to continue working towards contributing to similar success stories in the future.</p>
+            `
         }
     },
 
@@ -494,6 +572,40 @@ const config = [
                     path: 'M 513.455 15.3 L 502.505 15.3 L 502.505 26.25 L 502.505 24 L 502.505 34.95 L 490.655 34.95 L 490.655 43.65 L 502.505 43.65 L 502.505 79.95 C 502.361 100.085 510.629 111.532 525.589 112.442 A 32.405 32.405 0 0 0 527.555 112.5 C 540.368 112.5 551.257 101.106 551.257 86.99 A 27.486 27.486 0 0 0 551.255 86.7 L 542.255 84.75 C 540.755 97.5 534.005 102.75 527.705 102.75 A 13.875 13.875 0 0 1 521.003 101.22 C 516.743 98.915 514.402 94.082 513.613 87.242 A 50.717 50.717 0 0 1 513.305 81.45 L 513.305 43.65 L 547.205 43.65 L 547.205 34.95 L 513.305 34.95 C 513.305 34.95 513.455 15.3 513.455 15.3 Z'
                 }
             ]
+        },
+        content: {
+            type: 'text',
+            data: `
+                <a class="mail-button animated" href="mailto:hello@burak.works">hello@burak.works</a>
+
+                <div class="animated">
+
+                    <a title="github" target="_blank" href="https://github.com/burakkarakaya">
+                        <svg class="icon-burger fs-20">
+                            <use xlink:href="${icons}#github"></use>
+                        </svg>
+                    </a>
+
+                    <a title="linkedin" target="_blank" href="https://www.linkedin.com/in/brkkrky/">
+                        <svg class="icon-burger fs-20">
+                            <use xlink:href="${icons}#linkedin"></use>
+                        </svg>
+                    </a>
+
+                    <a title="instagram" target="_blank" href="https://www.instagram.com/travel.with.burak/">
+                        <svg class="icon-burger fs-20">
+                            <use xlink:href="${icons}#instagram"></use>
+                        </svg>
+                    </a>
+
+                    <a title="twitter" target="_blank" href="https://twitter.com/brk_efe">
+                        <svg class="icon-burger fs-20">
+                            <use xlink:href="${icons}#twitter"></use>
+                        </svg>
+                    </a>
+
+                </div>
+            `
         }
     },
 
@@ -512,4 +624,16 @@ const config = [
 
 ];
 
-export default config;
+const colorSchemes = [
+
+    ['#CD8D7A', '#FFE4C9', '#E78895', '#E2BFB3'],
+    ['#7BD3EA', '#A1EEBD', '#F6F7C4', '#F6D6D6'],
+    ['#8E7AB5', '#B784B7', '#E493B3', '#EEA5A6'],
+    ['#944E63', '#B47B84', '#CAA6A6', '#FFE7E7'],
+    ['#FF407D', '#FFCAD4', '#40679E', '#1B3C73'],
+    ['#35374B', '#344955', '#50727B', '#78A083'],
+    ['#5E1675', '#EE4266', '#FFD23F', '#337357']
+
+];
+
+export {config, colorSchemes};

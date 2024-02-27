@@ -115,7 +115,7 @@ class LayerManagement {
             this.docBody.classList.add(this.cls.backToHomeAnimate);
 
             if (this.content){
-                this.content.animateHideListItems();
+                this.content.endAnim();
             }
 
             if (this.stage) {

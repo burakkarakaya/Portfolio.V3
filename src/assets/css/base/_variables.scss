@@ -1,6 +1,35 @@
+
+/* https://colorhunt.co/ 
 $project-color: #e9e6c4;
 $skills-color: #bee7c3;
 $awards-color: #c7dcd9;
-$contact-color: #f5e4d9;
+$contact-color: #f5e4d9;*/
+$body-color: #000000;
+
+$project-color: var(--project-color, #e9e6c4);
+$skills-color: var(--skills-color, #bee7c3);
+$awards-color: var(--awards-color, #c7dcd9);
+$contact-color: var(--contact-color, #f5e4d9);
+
+/*
+https://mdigi.tools/color-shades/#000000
+
+*/
+
+$def-project-color: #000;
+$def-skills-color: #000;
+$def-awards-color: #000;
+$def-contact-color: #000;
+$def-center-color: #000;
+
+/*
+$def-project-color: #262626;
+$def-skills-color: #404040;
+$def-awards-color: #595959;
+$def-contact-color: #737373;
+$def-center-color: #8c8c8c;
+*/
+
+
 $white: #FFFFFF;
 $black: #000000;

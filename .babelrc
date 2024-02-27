@@ -6,7 +6,8 @@
         "alias": {
             "@root": "./src/assets/js",
             "@images": "./src/assets/images",
-            "@svg": "./src/assets/svg"
+            "@svg": "./src/assets/svg",
+            "@assets": "./src/assets"
         }
       }]
     ]

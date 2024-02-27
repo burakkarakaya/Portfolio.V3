@@ -4,13 +4,13 @@ Project Planing
 + Section Config file created
 + assets import
 + sass yapısı oluşturuldu
-- Layer Template Management
-- Gsap Integration
-- Layer animation
-- Matter Js Integration
-- Letter Animation
-- Content Config file created
-- Content Template Managent
++ Layer Template Management
++ Gsap Integration
++ Layer animation
++ Matter Js Integration
++ Letter Animation
++ Content Config file created
++ Content Template Managent
 - Content Animation
 - Project Page Content create
 - Awards Page Content create

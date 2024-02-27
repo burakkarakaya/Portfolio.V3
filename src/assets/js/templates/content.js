@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import icons from '@assets/icons.svg';
 import { CONTENT_TYPE } from '@root/enums';
 
 class Content {
@@ -7,68 +8,65 @@ class Content {
     }
 
     generateAwards({ awards }) {
-        return '';
+
+        return awards && awards.map(({ ico })=>`<svg class="icon-burger fs-20">
+                        <use xlink:href="${icons}#${ico}"></use>
+                    </svg></a>`).join('');
     }
+    
+    endAnim(){
 
-    async animateHideListItems() {
-
-        const items = Array.from(this.element.querySelectorAll('.list li'));
-
-        if (items.length > 0) {
-
-            const tl = gsap.timeline({
-                defaults: {
-                    duration: 0.8,
-                    ease: 'power2.out',
-                }
-            });
-
-            tl.to(items, {
-                opacity: 0,
-                y: 20,
-                rotateX: -90, // Initial rotation on the X-axis
-                transformOrigin: '50% 50% -50', // Adjust perspective value
-                stagger: 0.05,
-                onComplete: (index) => {
-                    // Additional actions after each item animation
-                    // You can access the index of the completed item using the 'index' parameter
-                }
-            });
-
-        }
-    }
-
-    async animateListItems(items) {
+        const animated = Array.from(this.element.querySelectorAll('.animated'));
 
         const tl = gsap.timeline({
             defaults: {
-                duration: 0.8,
+                duration: 0.3,
                 ease: 'power2.out',
             }
         });
 
-        tl.from(items, {
+        tl.to(animated, {
             opacity: 0,
             y: 20,
-            rotateX: -90, // Initial rotation on the X-axis
-            transformOrigin: '50% 50% -50', // Adjust perspective value
+            rotateX: -90,
+            transformOrigin: '50% 50% -50',
             stagger: 0.05,
-            onComplete: (index) => {
-                // Additional actions after each item animation
-                // You can access the index of the completed item using the 'index' parameter
+            onComplete: (index) => {}
+        });
+    }
+
+    startAnim(){
+
+        const animated = Array.from(this.element.querySelectorAll('.animated'));
+
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.3,
+                ease: 'power2.out',
             }
         });
 
-        return tl;
+        tl.from(animated, {
+            opacity: 0,
+            y: 20,
+            rotateX: -90,
+            transformOrigin: '50% 50% -50',
+            stagger: 0.05,
+            onComplete: (index) => {}
+        });
     }
 
     async generate(content) {
         const { type, data } = content;
 
         switch (type) {
+            case CONTENT_TYPE.text:
+                this.element && (this.element.innerHTML = data);
+                break;
+
             case CONTENT_TYPE.list:
                 const list = data.map((obj) => `
-                    <li>
+                    <li class="animated">
                         <span class="name">
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
                                 <span>${obj.name}</span>
@@ -80,7 +78,7 @@ class Content {
                         <span class="agency">${obj.agency}</span>
                     </li>`).join('');
 
-                const title = `<li class="title">
+                const title = `<li class="title animated">
                     <span class="name">name</span>
                     <span class="technologies">technologies</span>
                     <span class="type">type</span>
@@ -91,20 +89,15 @@ class Content {
 
                 this.element && (this.element.innerHTML = htm);
 
-                // Wait for the DOM to be updated before triggering the animation
-                await new Promise(resolve => requestAnimationFrame(resolve));
-
-                // Get all list items for animation
-                const itemsToAnimate = Array.from(this.element.querySelectorAll('.list li'));
-
-                // Animate list items
-                await this.animateListItems(itemsToAnimate);
-
                 break;
 
             default:
                 break;
         }
+
+        await new Promise(resolve => requestAnimationFrame(resolve));
+
+        this.startAnim();
     }
 
     reset() {

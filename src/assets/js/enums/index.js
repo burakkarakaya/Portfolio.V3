@@ -15,7 +15,9 @@ const ANIMATION = {
 };
 
 const CONTENT_TYPE = {
-    list: 'list'
+    list: 'list',
+    text: 'text',
+    form: 'form'
 };
 
 export {EVENT_TYPES, ANIMATION, CONTENT_TYPE};
