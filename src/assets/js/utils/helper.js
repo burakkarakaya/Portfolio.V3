@@ -182,10 +182,14 @@ export function flattenObject(obj, parentKey = '') {
 export function throttle(callback, delay) {
     let lastTime = 0;
     return function () {
-      const now = new Date().getTime();
-      if (now - lastTime >= delay) {
-        callback.apply(null, arguments);
-        lastTime = now;
-      }
+        const now = new Date().getTime();
+        if (now - lastTime >= delay) {
+            callback.apply(null, arguments);
+            lastTime = now;
+        }
     };
-  }
+}
+
+export function lerp(a, b, n) {
+    return (1 - n) * a + n * b;
+}

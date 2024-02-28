@@ -56,7 +56,10 @@ class Content {
             rotateX: -90,
             transformOrigin: '50% 50% -50',
             stagger: 0.05,
-            onComplete: (index) => {}
+            onComplete: (index) => {
+                
+                animated.forEach((element)=>element.removeAttribute('style'));
+            }
         });
     }
 
@@ -80,7 +83,7 @@ class Content {
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
                                 <span>${obj.name}</span>
                             </a>
-                            ${this.generateAwards(obj)}
+                            <span class="awards">${this.generateAwards(obj)}</span>
                         </span>
                         <span class="technologies">${obj.technologies.join(',')}</span>
                         <span class="type">${obj.type}</span>

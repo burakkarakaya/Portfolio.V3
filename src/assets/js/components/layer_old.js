@@ -10,7 +10,7 @@ class Layer {
         this.distance = layer.distance;
         this.radius = layer.radius;
         this.speed = layer.speed;
-        this.duration = layer.duration * .5;
+        this.duration = layer.duration;
 
         //
         this.buttonPointerWidth = 14;

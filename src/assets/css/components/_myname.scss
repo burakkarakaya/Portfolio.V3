@@ -1,0 +1,29 @@
+.myname{
+    transform: rotate(90deg);
+    transform-origin: left bottom;
+    position: fixed;
+    bottom: 130px;
+    color: #FFF;
+    z-index: 105;
+
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-100%) rotate(90deg);
+    transition: all ease-in-out .3s;
+    filter: invert(.8);
+    will-change: transform;
+  }
+
+  .ready{
+    .myname{
+        transform: translateX(11%) rotate(90deg);
+        opacity: 1;
+    }
+}
+
+.back-to-home-animate{
+    .myname{
+        transform: translateX(-100%) rotate(90deg);
+        pointer-events: none;
+    }
+}
