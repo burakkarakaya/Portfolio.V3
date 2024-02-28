@@ -1,6 +1,10 @@
 import { gsap } from "gsap";
+
 import icons from '@assets/icons.svg';
+
 import { CONTENT_TYPE } from '@root/enums';
+
+import HoverImg from '@root/components/hoverImg';
 
 class Content {
     constructor() {
@@ -56,6 +60,11 @@ class Content {
         });
     }
 
+    initPlugins(){
+        const imgHover = this.element.querySelectorAll('[data-img]');
+        imgHover && imgHover.forEach(element => new HoverImg(element));
+    }
+
     async generate(content) {
         const { type, data } = content;
 
@@ -66,7 +75,7 @@ class Content {
 
             case CONTENT_TYPE.list:
                 const list = data.map((obj) => `
-                    <li class="animated">
+                    <li data-img="${obj.media.join()}" class="animated">
                         <span class="name">
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
                                 <span>${obj.name}</span>
@@ -98,6 +107,7 @@ class Content {
         await new Promise(resolve => requestAnimationFrame(resolve));
 
         this.startAnim();
+        this.initPlugins();
     }
 
     reset() {

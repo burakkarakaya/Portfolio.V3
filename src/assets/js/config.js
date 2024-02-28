@@ -72,7 +72,7 @@ const config = [
                     link: 'http://nike.lidyana.com',
                     agency: 'minus99',
                     technologies: ['CreateJS', 'JQuery', 'HTML5', 'CSS3'],
-                    media: [],
+                    media: ['https://hcdn.proj-e.com/proje/uploads/works/monster-cover.jpg'],
                     type: 'Web',
                     awards: [
                         {
@@ -624,7 +624,12 @@ const config = [
 
 ];
 
+
+
+
 const colorSchemes = [
+
+    ['#e9e6c4', '#bee7c3', '#c7dcd9', '#f5e4d9'],
 
     ['#CD8D7A', '#FFE4C9', '#E78895', '#E2BFB3'],
     ['#7BD3EA', '#A1EEBD', '#F6F7C4', '#F6D6D6'],

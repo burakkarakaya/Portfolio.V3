@@ -53,20 +53,3 @@ new AssetsLoader({...pngFileSrc, ...helper.flattenObject(svgFileSrc.sections
         layerManagement.starting();
     }
 });
-
-/*
-function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-// Assign random colors to SASS variables
-document.styleSheets[0].addRule(':root', `--project-color: ${getRandomColor()}`);
-document.styleSheets[0].addRule(':root', `--skills-color: ${getRandomColor()}`);
-document.styleSheets[0].addRule(':root', `--awards-color: ${getRandomColor()}`);
-document.styleSheets[0].addRule(':root', `--contact-color: ${getRandomColor()}`);
-*/
