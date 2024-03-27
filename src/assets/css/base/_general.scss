@@ -1,0 +1,13 @@
+.d-flex{
+    display: flex;
+}
+
+$margin-step: 5;
+
+// Margin class'larını oluştur
+@for $i from 0 through 6 {
+  $margin-value: $i * $margin-step; 
+  .mr-#{$margin-value} {
+    margin-right: #{$margin-value}px;
+  }
+}

@@ -5,8 +5,9 @@ import { EVENT_TYPES, ANIMATION } from '@root/enums';
 
 class Layer {
     constructor({ key, button, layer }, callback) {
+        this.isMobile = helper.mobile.detect();
         this.key = key;
-        this.degree = button && helper.getDegree(button.degree);
+        this.degree = button && helper.getDegree(this.isMobile ? button.degreeMobile : button.degree);
         this.distance = layer.distance;
         this.radius = layer.radius;
         this.speed = layer.speed;

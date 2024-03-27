@@ -6,7 +6,8 @@ const config = [
         key: 'projects',
         button: {
             title: 'Projects',
-            degree: 202
+            degree: 202,
+            degreeMobile: 260
         },
         layer: {
             color: '#e9e6c4',
@@ -306,7 +307,8 @@ const config = [
         key: 'awards',
         button: {
             title: 'Awards',
-            degree: 210
+            degree: 210,
+            degreeMobile: 240
         },
         layer: {
             color: '#bee7c3',
@@ -460,7 +462,8 @@ const config = [
         key: 'skills',
         button: {
             title: 'Skills',
-            degree: 215
+            degree: 215,
+            degreeMobile: 250
         },
         layer: {
             color: '#c7dcd9',
@@ -522,7 +525,8 @@ const config = [
         key: 'contact',
         button: {
             title: 'Contact',
-            degree: 220
+            degree: 220,
+            degreeMobile: 260
         },
         layer: {
             color: '#f5e4d9',

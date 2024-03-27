@@ -83,6 +83,9 @@ class LayerManagement {
     loadStage(activeRel) {
         const activeSectionOptions = this.options.find(x => x.key === activeRel);
         const activeSvgFileSrc = svgFileSrc.sections[activeRel];
+        const activeBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--${activeRel}-color`);
+
+        console.log(activeBackgroundColor, helper.isLightingColor(activeBackgroundColor), helper.isLightingColor(activeBackgroundColor) ? 'dark' : 'light')
 
         this.navigation.focused(activeRel);
 

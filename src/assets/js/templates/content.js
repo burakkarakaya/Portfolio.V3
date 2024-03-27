@@ -13,7 +13,7 @@ class Content {
 
     generateAwards({ awards }) {
 
-        return awards && awards.map(({ ico })=>`<svg class="icon-burger fs-20">
+        return awards && awards.map(({ ico })=>`<svg class="icon ${ico}">
                         <use xlink:href="${icons}#${ico}"></use>
                     </svg></a>`).join('');
     }
@@ -83,7 +83,7 @@ class Content {
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
                                 <span>${obj.name}</span>
                             </a>
-                            <span class="awards">${this.generateAwards(obj)}</span>
+                            <span class="awards d-flex">${this.generateAwards(obj)}</span>
                         </span>
                         <span class="technologies">${obj.technologies.join(',')}</span>
                         <span class="type">${obj.type}</span>

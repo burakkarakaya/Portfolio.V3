@@ -193,3 +193,17 @@ export function throttle(callback, delay) {
 export function lerp(a, b, n) {
     return (1 - n) * a + n * b;
 }
+
+export function isLightingColor(color) {
+    var hex = color.replace('#', ''); // HEX değeri temizle
+    var r = parseInt(hex.substring(0, 2), 16); // Kırmızı bileşenini al
+    var g = parseInt(hex.substring(2, 4), 16); // Yeşil bileşenini al
+    var b = parseInt(hex.substring(4, 6), 16); // Mavi bileşenini al
+    var sum = r + g + b; // Rengin toplamı
+
+    // Toplamın 382'den büyük olması, çok parlak bir renge işaret eder
+    return sum > 382;
+}
+
+
+export const mobile = function () { return { detect: function () { var uagent = navigator.userAgent.toLowerCase(); var list = this.mobiles; var ismobile = false; for (var d = 0; d < list.length; d += 1)if (uagent.indexOf(list[d]) != -1) ismobile = true; return ismobile }, mobiles: ["midp", "240x320", "blackberry", "netfront", "nokia", "panasonic", "portalmmm", "sharp", "sie-", "sonyericsson", "symbian", "windows ce", "benq", "mda", "mot-", "opera mini", "philips", "pocket pc", "sagem", "samsung", "sda", "sgh-", "vodafone", "xda", "palm", "iphone", "ipod", "android", "ipad"] } }();
