@@ -1,5 +1,5 @@
-@mixin clipPath($radius, $zIndex){
-    //clip-path: circle(calc($radius + var(--maskSize, 0%)) at var(--x, 50%) var(--y, 50%)) !important;
-    clip-path: circle($radius at var(--x, 50%) var(--y, 50%));
-    z-index: $zIndex;
+@mixin clipPath($radius, $zIndex) {
+  //clip-path: circle(calc($radius + var(--maskSize, 0%)) at var(--x, 50%) var(--y, 50%)) !important;
+  clip-path: circle($radius at var(--x, 50%) var(--y, 50%));
+  z-index: $zIndex;
 }
