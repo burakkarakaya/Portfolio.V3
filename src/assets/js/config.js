@@ -512,7 +512,10 @@ const config = [
         content: {
             type: 'text',
             data: `
-            <p class="animated">Hello, I'm Burak Karakaya. I'm an experienced JavaScript Developer and Frontend Team Leader. Throughout my career, I've focused on JavaScript, React Native, and modern web technologies, contributing to the success stories of various brands with technical depth and creative solutions.</p>
+
+            <p class="animated">Hello, I'm  <span class="word">Burak Karakaya</span><span class="word">a Javascript Developer</span></p>
+
+            <p class="animated">I'm an experienced JavaScript Developer and Frontend Team Leader. Throughout my career, I've focused on JavaScript, React Native, and modern web technologies, contributing to the success stories of various brands with technical depth and creative solutions.</p>
 
             <p class="animated">I've specialized in optimizing user experiences in e-commerce projects, particularly in handling API requests and utilizing pure JavaScript and animation techniques. Leading under the Agile methodology, I stand out for applying my technical knowledge effectively in practice.</p>
             

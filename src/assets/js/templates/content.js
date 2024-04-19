@@ -1,14 +1,22 @@
 import { gsap } from "gsap";
 
+import * as helper from '@root/utils/helper';
+
 import icons from '@assets/icons.svg';
 
 import { CONTENT_TYPE } from '@root/enums';
 
 import HoverImg from '@root/components/hoverImg';
 
+import WordAnimate from '@root/components/wordAnimator';
+
 class Content {
     constructor() {
         this.element = document.querySelector('.contents');
+        this.docBody = document.body;
+        this.cls = {
+            backToHomeAnimate: 'back-to-home-animate'
+        };
     }
 
     generateAwards({ awards }) {
@@ -22,50 +30,69 @@ class Content {
 
         const animated = Array.from(this.element.querySelectorAll('.animated'));
 
-        const tl = gsap.timeline({
-            defaults: {
-                duration: 0.3,
-                ease: 'power2.out',
-            }
-        });
+        if (animated.length > 0){
+            
+            const tl = gsap.timeline({
+                defaults: {
+                    duration: 0.3,
+                    ease: 'power2.out',
+                }
+            });
+    
+            tl.to(animated, {
+                opacity: 0,
+                y: 20,
+                rotateX: -90,
+                transformOrigin: '50% 50% -50',
+                stagger: 0.05,
+                onComplete: (index) => {}
+            });
 
-        tl.to(animated, {
-            opacity: 0,
-            y: 20,
-            rotateX: -90,
-            transformOrigin: '50% 50% -50',
-            stagger: 0.05,
-            onComplete: (index) => {}
-        });
+        }
     }
 
     startAnim(){
 
+        const _self = this;
+
         const animated = Array.from(this.element.querySelectorAll('.animated'));
 
-        const tl = gsap.timeline({
-            defaults: {
-                duration: 0.3,
-                ease: 'power2.out',
-            }
-        });
+        if (animated.length > 0){
 
-        tl.from(animated, {
-            opacity: 0,
-            y: 20,
-            rotateX: -90,
-            transformOrigin: '50% 50% -50',
-            stagger: 0.05,
-            onComplete: (index) => {
-                
-                animated.forEach((element)=>element.removeAttribute('style'));
-            }
-        });
+            const tl = gsap.timeline({
+                defaults: {
+                    duration: 0.3,
+                    ease: 'power2.out',
+                }
+            });
+    
+            tl.from(animated, {
+                opacity: 0,
+                y: 20,
+                rotateX: -90,
+                transformOrigin: '50% 50% -50',
+                stagger: 0.05,
+                onComplete: (index) => {
+                    if (!helper.hasClass({ element: _self.docBody, value: _self.cls.backToHomeAnimate })) {
+                        animated.forEach((element)=>element.removeAttribute('style'));
+                    }
+                }
+            });
+
+        }
     }
 
     initPlugins(){
         const imgHover = this.element.querySelectorAll('[data-img]');
-        imgHover && imgHover.forEach(element => new HoverImg(element));
+        imgHover.length > 0 && imgHover.forEach(element => new HoverImg(element));
+
+        const words = this.element.querySelectorAll('.word');
+        if (window.wordAnimation){
+            clearInterval(window.wordAnimation)
+        }
+        if (words.length > 0){
+            new WordAnimate(words);
+        } 
     }
 
     async generate(content) {
