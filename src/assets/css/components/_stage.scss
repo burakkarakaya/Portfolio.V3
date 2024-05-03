@@ -32,3 +32,13 @@
     }
   }
 }
+
+@media (max-width: 960px) {
+  main {
+    section {
+      svg.letters {
+        display: none !important;
+      }
+    }
+  }
+}

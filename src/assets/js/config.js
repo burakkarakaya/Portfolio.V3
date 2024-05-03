@@ -509,23 +509,15 @@ const config = [
             
             <div class="text">
             <h1>
-              Hello, I'm 
+              <span>Hello, I'm </span>
                   <span class="vert-slider">
+                    <div class="vert-slider-text3 word">Burak Karakaya</div>
                     <div class="vert-slider-text1 word">Frontend Team Leader</div>
                     <div class="vert-slider-text2 word">Javascript Developer</div>
-                    <div class="vert-slider-text3 word">Burak Karakaya</div>
                 </span>
             </h1> 
             </div>
 
-            <h1>
-              Hello, I'm 
-                  <span class="vert-slider">
-                    <div class="vert-slider-text1">Frontend Team Leader</div>
-                    <div class="vert-slider-text2">Javascript Developer</div>
-                    <div class="vert-slider-text3">Burak Karakaya</div>
-                </span>
-            </h1> 
             </span>
 
             <p class="animated skills-text"> I'm an experienced <mark>JavaScript Developer</mark> and <mark>Frontend Team Leader</mark>. Throughout my career, I've focused on JavaScript, React Native, and modern web technologies, contributing to the success stories of various brands with technical depth and creative solutions.</p>

@@ -1,58 +1,59 @@
 .d-flex{
-    display: flex;
+  display: flex;
 }
 
 $margin-step: 5;
 
 // Margin class'larını oluştur
 @for $i from 0 through 6 {
-  $margin-value: $i * $margin-step; 
-  .mr-#{$margin-value} {
-    margin-right: #{$margin-value}px;
-  }
+$margin-value: $i * $margin-step; 
+.mr-#{$margin-value} {
+  margin-right: #{$margin-value}px;
+}
 }
 
-
+/*
 .text {
-  position: absolute;
-  width: 450px;
-  left: 50%;
-  margin-left: -225px;
-  height: 40px;
-  top: 50%;
-  margin-top: -20px;
+position: absolute;
+width: 450px;
+left: 50%;
+margin-left: -225px;
+height: 40px;
+top: 50%;
+margin-top: -20px;
 }
+*/
 
 p {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0;
+display: inline-block;
+vertical-align: top;
+margin: 0;
 }
 
 .word {
-  position: absolute;
-  width: 220px;
-  opacity: 0;
+position: absolute;
+// width: 220px;
+opacity: 0;
 }
 
 .letter {
-  display: inline-block;
-  position: relative;
-  float: left;
-  transform: translateZ(25px);
-  transform-origin: 50% 50% 25px;
+display: inline-block;
+position: relative;
+float: left;
+transform: translateZ(25px);
+transform-origin: 50% 50% 25px;
 }
 
 .letter.out {
-  transform: rotateX(90deg);
-  transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+transform: rotateX(90deg);
+transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
 .letter.behind {
-  transform: rotateX(-90deg);
+transform: rotateX(-90deg);
 }
 
 .letter.in {
-  transform: rotateX(0deg);
-  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform: rotateX(0deg);
+transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

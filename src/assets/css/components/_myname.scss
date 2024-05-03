@@ -27,3 +27,7 @@
         pointer-events: none;
     }
 }
+
+@media (max-width: 960px) {
+    .myname {display: none;}
+  }

@@ -29,3 +29,7 @@
   background-size: cover;
   background-position: 50% 50%;
 }
+
+@media (max-width: 960px) {
+  .hover-reveal {display: none;}
+}

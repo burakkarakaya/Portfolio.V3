@@ -1,122 +1,147 @@
 .navigation {
-    position: fixed;
-    z-index: 102;
-    bottom: 20;
-    margin-top: 20px;
-    pointer-events: none;
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-    transition: all ease-in-out 0.3s;
+  position: fixed;
+  z-index: 102;
+  bottom: 20;
+  margin-top: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+  transition: all ease-in-out 0.3s;
+  filter: invert(1);
+  will-change: transform;
+  &:after {
+    content: "";
+    width: 1px;
+    height: 100vh;
+    background: #000;
+    position: absolute;
+    left: calc(100% + 50px);
+    top: -110px;
+    opacity: 0.3;
     filter: invert(1);
-    will-change: transform;
-    &:after {
+  }
+
+  a {
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+    &:before {
       content: "";
-      width: 1px;
-      height: 100vh;
-      background: #000;
       position: absolute;
-      left: calc(100% + 50px);
-      top: -110px;
-      opacity: 0.3;
+      width: 100%;
+      height: 1px;
+      background: #000;
       filter: invert(1);
+      top: 100%;
+      left: 0;
+      transform-origin: 50% 100%;
+      transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+      clip-path: polygon(
+        0% 0%,
+        0% 100%,
+        0 100%,
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        0 100%,
+        100% 100%,
+        100% 0%
+      );
     }
-  
-    a {
-      margin-bottom: 15px;
-      display: block;
-      position: relative;
-      &:before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        background: #000;
-        filter: invert(1);
-        top: 100%;
-        left: 0;
-        transform-origin: 50% 100%;
-        transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+
+    &:hover {
+      &::before {
+        transform: translate3d(0, 2px, 0) scale3d(1.08, 3, 1);
         clip-path: polygon(
           0% 0%,
           0% 100%,
-          0 100%,
-          0 0,
-          100% 0,
-          100% 100%,
-          0 100%,
+          50% 100%,
+          50% 0,
+          50% 0,
+          50% 100%,
+          50% 100%,
           0 100%,
           100% 100%,
           100% 0%
         );
       }
-  
-      &:hover {
-        &::before {
-          transform: translate3d(0, 2px, 0) scale3d(1.08, 3, 1);
-          clip-path: polygon(
-            0% 0%,
-            0% 100%,
-            50% 100%,
-            50% 0,
-            50% 0,
-            50% 100%,
-            50% 100%,
-            0 100%,
-            100% 100%,
-            100% 0%
-          );
-        }
-        span {
-          transform: translate3d(0, -2px, 0);
-        }
-      }
-  
       span {
-        color: #ffffff;
-        font-weight: 500;
-        line-height: 22px;
-        font-size: 20px;
-        display: inline-block;
-        transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
-      }
-  
-      opacity: 1;
-      transition: all ease-in-out 0.3s;
-      &:after {
-        content: "";
-        position: absolute;
-        right: -50px;
-        top: 12px;
-        height: 1px;
-        width: 0px;
-        background: #000;
-        filter: invert(1);
-        opacity: 0.3;
-        transition: all 0.3s ease;
-      }
-      &.selected {
-        opacity: 0.7;
-        pointer-events: none;
-        &:after {
-          width: 25px;
-        }
+        transform: translate3d(0, -2px, 0);
       }
     }
-  }
-  
-  .ready {
-    .navigation {
-      transform: translate3d(22%, 0, 0);
-      pointer-events: all;
-      opacity: 1;
-      z-index: 110;
+
+    span {
+      color: #ffffff;
+      font-weight: 500;
+      line-height: 22px;
+      font-size: 20px;
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
     }
-  }
-  
-  .back-to-home-animate {
-    .navigation {
-      transform: translate3d(-100%, 0, 0);
+
+    opacity: 1;
+    transition: all ease-in-out 0.3s;
+    &:after {
+      content: "";
+      position: absolute;
+      right: -50px;
+      top: 12px;
+      height: 1px;
+      width: 0px;
+      background: #000;
+      filter: invert(1);
+      opacity: 0.3;
+      transition: all 0.3s ease;
+    }
+    &.selected {
+      opacity: 0.7;
       pointer-events: none;
+      &:after {
+        width: 25px;
+      }
     }
   }
-  
+}
+
+.ready {
+  .navigation {
+    transform: translate3d(22%, 0, 0);
+    pointer-events: all;
+    opacity: 1;
+    z-index: 110;
+  }
+}
+
+.back-to-home-animate {
+  .navigation {
+    transform: translate3d(-100%, 0, 0);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .navigation {
+    transform: none !important;
+    right: 20px;
+    top: 15px;
+    display: flex;
+    gap: 15px;
+    transition: all .3s ease;
+    &::after {
+      display:none;
+    }
+    a {
+      span {font-size:14px;}
+      &::after {
+        display:none;
+      }
+    }
+  }
+  .ready {
+    .navigation {opacity: 1;}
+  }
+  .back-to-home-animate {
+    .navigation {opacity: 0;}
+  }
+}
