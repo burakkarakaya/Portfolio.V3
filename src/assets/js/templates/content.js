@@ -108,7 +108,7 @@ class Content {
                     <li data-img="${obj.media.join()}" class="animated">
                         <span class="name">
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
-                                <span>${obj.name}</span>
+                                <span title="${obj.name}">${obj.name}</span>
                             </a>
                             <span class="awards d-flex">${this.generateAwards(obj)}</span>
                         </span>
