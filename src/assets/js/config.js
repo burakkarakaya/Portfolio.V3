@@ -67,11 +67,12 @@ const config = [
       data: [
         {
           name: "Nike Geç Kendini",
-          link: "http://nike.lidyana.com",
+          link: "https://player.vimeo.com/video/132407281?h=dc31d97a5e",
           agency: "minus99",
           technologies: ["CreateJS", "JQuery", "HTML5", "CSS3"],
+          video: true,
           media: [
-            "https://hcdn.proj-e.com/proje/uploads/works/monster-cover.jpg",
+            'https://www.minus99.com/wp-content/uploads/nike-thumbnail.jpg'
           ],
           type: "Web",
           awards: [
@@ -123,10 +124,11 @@ const config = [
 
         {
           name: "Vakko Özeldikim",
-          link: "https://ozeldikim.vakko.com",
+          link: "https://www.youtube.com/embed/017X_WLPCj8?si=Noiu7oAP1DavRIRt",
           agency: "minus99",
           technologies: ["Canvas", "JQuery", "HTML5", "CSS3"],
-          media: [],
+          video: true,
+          media: ['https://www.cssdesignawards.com/cdasites/2013/201312/20131213033322.jpg'],
           type: "Web",
           awards: [
             {
@@ -148,7 +150,7 @@ const config = [
           link: "javascript:void(0);",
           agency: "proj-e",
           technologies: ["CMS", "React Native"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/flormar-thumbnail.jpg'],
           type: "App",
           awards: [],
           description: "",
@@ -159,7 +161,7 @@ const config = [
           link: "javascript:void(0);",
           agency: "proj-e",
           technologies: ["CMS", "React Native"],
-          media: [],
+          media: ['https://hcdn.proj-e.com/proje/uploads/works/cosmetica-poster.jpg'],
           type: "App",
           awards: [],
           description: "",
@@ -170,7 +172,7 @@ const config = [
           link: "https://www.vitra.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://hcdn.proj-e.com/proje/uploads/works/vitra-cover.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -181,7 +183,7 @@ const config = [
           link: "https://www.newbalance.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://hcdn.proj-e.com/proje/uploads/works/newbalance-poster.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -192,7 +194,7 @@ const config = [
           link: "https://www.kartalyuvasi.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/bjk-thumbnail.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -203,7 +205,7 @@ const config = [
           link: "https://www.korayspor.com/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/korayspor-thumbnail.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -214,7 +216,7 @@ const config = [
           link: "https://www.monsternotebook.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://hcdn.proj-e.com/proje/uploads/works/monster-cover.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -225,7 +227,7 @@ const config = [
           link: "https://www.lescon.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://hcdn.proj-e.com/proje/uploads/works/Lescon.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -236,18 +238,7 @@ const config = [
           link: "https://www.unibaby.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
-          type: "Web",
-          awards: [],
-          description: "",
-        },
-
-        {
-          name: "E-Sanalmagaza",
-          link: "https://www.e-sanalmagaza.com/",
-          agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/unibaby-thumbnail.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -258,18 +249,7 @@ const config = [
           link: "https://www.machka.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
-          type: "Web",
-          awards: [],
-          description: "",
-        },
-
-        {
-          name: "Twist",
-          link: "https://www.twist.com.tr/",
-          agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/machka-thumbnail.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -280,7 +260,18 @@ const config = [
           link: "https://www.ipekyol.com.tr/",
           agency: "proj-e",
           technologies: ["CMS", "C#", "Razor", "Pure JS"],
-          media: [],
+          media: ['https://www.minus99.com/wp-content/uploads/ipekyol-thumbnail.jpg'],
+          type: "Web",
+          awards: [],
+          description: "",
+        },
+
+        {
+          name: "Twist",
+          link: "https://www.twist.com.tr/",
+          agency: "proj-e",
+          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          media: ['https://www.minus99.com/wp-content/uploads/machka-thumbnail.jpg'],
           type: "Web",
           awards: [],
           description: "",
@@ -356,10 +347,13 @@ const config = [
       data: [
         {
           name: "Nike Geç Kendini",
-          link: "http://nike.lidyana.com",
+          link: "https://player.vimeo.com/video/132407281?h=dc31d97a5e",
           agency: "minus99",
           technologies: ["CreateJS", "JQuery", "HTML5", "CSS3"],
-          media: [],
+          video: true,
+          media: [
+            'https://www.minus99.com/wp-content/uploads/nike-thumbnail.jpg'
+          ],
           type: "Web",
           awards: [
             {
@@ -410,10 +404,11 @@ const config = [
 
         {
           name: "Vakko Özeldikim",
-          link: "https://ozeldikim.vakko.com",
+          link: "https://www.youtube.com/embed/017X_WLPCj8?si=Noiu7oAP1DavRIRt",
           agency: "minus99",
           technologies: ["Canvas", "JQuery", "HTML5", "CSS3"],
-          media: [],
+          video: true,
+          media: ['https://www.cssdesignawards.com/cdasites/2013/201312/20131213033322.jpg'],
           type: "Web",
           awards: [
             {
@@ -439,9 +434,9 @@ const config = [
           type: "Web",
           awards: [
             {
-              ico: "designlicks",
-              link: "www.designlicks.com/ramsey",
-              title: "Site of the day",
+              ico: "",
+              link: "",
+              title: "Designlicks",
             },
           ],
           description: "",
@@ -512,8 +507,7 @@ const config = [
               <span>Hello, I'm </span>
                   <span class="vert-slider">
                     <div class="vert-slider-text3 word">Burak Karakaya</div>
-                    <div class="vert-slider-text1 word">Frontend Team Leader</div>
-                    <div class="vert-slider-text2 word">Javascript Developer</div>
+                    <div class="vert-slider-text2 word">a Javascript Developer</div>
                 </span>
             </h1> 
             </div>

@@ -7,6 +7,7 @@ import icons from '@assets/icons.svg';
 import { CONTENT_TYPE } from '@root/enums';
 
 import HoverImg from '@root/components/hoverImg';
+import VideoModal from '@root/components/modalVideo';
 
 import WordAnimate from '@root/components/wordAnimator';
 
@@ -17,47 +18,52 @@ class Content {
         this.cls = {
             backToHomeAnimate: 'back-to-home-animate'
         };
+        this.videoModal = new VideoModal();
     }
 
     generateAwards({ awards }) {
 
-        return awards && awards.map(({ ico })=>`<svg class="icon ${ico}">
-                        <use xlink:href="${icons}#${ico}"></use>
-                    </svg></a>`).join('');
+        return awards && awards.map(({ ico, title }) => {
+
+            return ico != '' ? `<svg class="icon ${ico}">
+            <use xlink:href="${icons}#${ico}"></use>
+        </svg></a>` : title
+
+        }).join('');
     }
-    
-    endAnim(){
+
+    endAnim() {
 
         const animated = Array.from(this.element.querySelectorAll('.animated'));
 
-        if (animated.length > 0){
-            
+        if (animated.length > 0) {
+
             const tl = gsap.timeline({
                 defaults: {
                     duration: 0.3,
                     ease: 'power2.out',
                 }
             });
-    
+
             tl.to(animated, {
                 opacity: 0,
                 y: 20,
                 rotateX: -90,
                 transformOrigin: '50% 50% -50',
                 stagger: 0.05,
-                onComplete: (index) => {}
+                onComplete: (index) => { }
             });
 
         }
     }
 
-    startAnim(){
+    startAnim() {
 
         const _self = this;
 
         const animated = Array.from(this.element.querySelectorAll('.animated'));
 
-        if (animated.length > 0){
+        if (animated.length > 0) {
 
             const tl = gsap.timeline({
                 defaults: {
@@ -65,7 +71,7 @@ class Content {
                     ease: 'power2.out',
                 }
             });
-    
+
             tl.from(animated, {
                 opacity: 0,
                 y: 20,
@@ -74,7 +80,7 @@ class Content {
                 stagger: 0.05,
                 onComplete: (index) => {
                     if (!helper.hasClass({ element: _self.docBody, value: _self.cls.backToHomeAnimate })) {
-                        animated.forEach((element)=>element.removeAttribute('style'));
+                        animated.forEach((element) => element.removeAttribute('style'));
                     }
                 }
             });
@@ -82,17 +88,17 @@ class Content {
         }
     }
 
-    initPlugins(){
+    initPlugins() {
         const imgHover = this.element.querySelectorAll('[data-img]');
         imgHover.length > 0 && imgHover.forEach(element => new HoverImg(element));
 
         const words = this.element.querySelectorAll('.word');
-        if (window.wordAnimation){
+        if (window.wordAnimation) {
             clearInterval(window.wordAnimation)
         }
-        if (words.length > 0){
+        if (words.length > 0) {
             new WordAnimate(words);
-        } 
+        }
     }
 
     async generate(content) {
@@ -104,8 +110,12 @@ class Content {
                 break;
 
             case CONTENT_TYPE.list:
-                const list = data.map((obj) => `
-                    <li data-img="${obj.media.join()}" class="animated">
+                const list = data.map((obj) => {
+
+                    const isVideo = obj.video || false;
+
+                    return (`
+                    <li ${isVideo ? 'data-video' : ''} data-img="${obj.media.join()}" class="animated">
                         <span class="name">
                             <a title="${obj.name}" target="_blank" href="${obj.link}">
                                 <span title="${obj.name}">${obj.name}</span>
@@ -115,7 +125,9 @@ class Content {
                         <span class="technologies">${obj.technologies.join(',')}</span>
                         <span class="type">${obj.type}</span>
                         <span class="agency">${obj.agency}</span>
-                    </li>`).join('');
+                    </li>`);
+
+                }).join('');
 
                 const title = `<li class="title animated">
                     <span class="name">name</span>
@@ -128,6 +140,8 @@ class Content {
 
                 this.element && (this.element.innerHTML = htm);
 
+                this.addEvent();
+
                 break;
 
             default:
@@ -138,6 +152,26 @@ class Content {
 
         this.startAnim();
         this.initPlugins();
+    }
+
+    addEvent() {
+
+        const videos = this.element.querySelectorAll('[data-video]');
+        if (videos.length > 0) {
+            videos.forEach((element) => {
+
+                element.addEventListener('click', (evt) => {
+                    const hrf = evt.currentTarget.querySelector('a').getAttribute('href') || '';
+                    if (hrf != '')
+                        this.videoModal.show({ src: hrf });
+                });
+
+                element.querySelector('a').addEventListener('click', function (evt) {
+                    evt.preventDefault();
+                });
+            })
+        }
+
     }
 
     reset() {

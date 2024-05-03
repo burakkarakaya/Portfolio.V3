@@ -22,13 +22,17 @@ class HoverImg {
                 left: document.body.scrollLeft + document.documentElement.scrollLeft,
                 top: document.body.scrollTop + document.documentElement.scrollTop
             };
-            this.DOM.reveal.style.top = `${mousePos.y + 20 - docScrolls.top}px`;
-            this.DOM.reveal.style.left = `${mousePos.x + 20 - docScrolls.left}px`;
+            const spacing = 0;
+            const clientRect = this.DOM.revealImg.getBoundingClientRect();
+            this.DOM.reveal.style.top = `${(mousePos.y + spacing - docScrolls.top) - clientRect.height * .5}px`;
+            this.DOM.reveal.style.left = `${(mousePos.x + spacing - docScrolls.left) - clientRect.width * .5}px`;
         };
 
-        this.mouseenterFn = (ev) => {
+        this.mouseenterFn = async (ev) => {
             this.positionElement(ev);
+            await new Promise(resolve => requestAnimationFrame(resolve));
             this.showImage();
+            
         };
 
         this.mousemoveFn = (ev) => requestAnimationFrame(() => {
