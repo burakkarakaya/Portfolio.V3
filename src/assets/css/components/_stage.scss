@@ -1,32 +1,34 @@
-.stage{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 101;
-    pointer-events: none;
-    opacity: 0;
+.stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 1s ease;
 }
 
-.ready{
-    .stage{
-        pointer-events: all;
-        opacity: 1;
-    }
-    
-    .slogan,
-    button,
-    svg.letters {
-        opacity: 0;
-    }
+.ready {
+  .stage {
+    pointer-events: all;
+    filter: blur(12px);
+    opacity: 0.8;
+  }
 
-    main{
-        section{
-            svg.letters{
-                top:0;
-                transform: translate3d(0, -100%, 0);
-            }
-        }
+  .slogan,
+  button,
+  svg.letters {
+    opacity: 0;
+  }
+
+  main {
+    section {
+      svg.letters {
+        top: 0;
+        transform: translate3d(0, -100%, 0);
+      }
     }
+  }
 }
