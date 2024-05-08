@@ -1,5 +1,5 @@
 {
-  "extends": "@parcel/config-default",
+  "extends": "@parcel/config-webextension",
   "resolvers": [
     "@parcel/resolver-glob"
   ]
