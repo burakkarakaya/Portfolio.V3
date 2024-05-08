@@ -576,7 +576,6 @@ mark {
     top: 0px;
   }
 }
-
 .social {
   margin-top: 50px;
   justify-content: space-between;
@@ -645,6 +644,7 @@ mark {
 }
 
 @media (max-width: 960px) {
+  .social-wrapper {height:auto;}
   main[rel=skills] .contents, main[rel=contact] .contents {padding: 30px 15px 100px 15px;}
   .word {
     span {font-size: 30px;}

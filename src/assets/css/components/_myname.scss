@@ -8,7 +8,7 @@
 
     pointer-events: none;
     opacity: 0;
-    transform: translateX(-100%) rotate(90deg);
+    transform: translateX(-200%) rotate(90deg);
     transition: all ease-in-out .3s;
     filter: invert(.8);
     will-change: transform;
@@ -23,7 +23,7 @@
 
 .back-to-home-animate{
     .myname{
-        transform: translateX(-100%) rotate(90deg);
+        transform: translateX(-200%) rotate(90deg);
         pointer-events: none;
     }
 }

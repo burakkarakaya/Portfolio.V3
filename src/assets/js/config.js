@@ -171,7 +171,7 @@ const config = [
           name: "VitrA",
           link: "https://www.vitra.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://hcdn.proj-e.com/proje/uploads/works/vitra-cover.jpg'],
           type: "Web",
           awards: [],
@@ -182,7 +182,7 @@ const config = [
           name: "Newbalance",
           link: "https://www.newbalance.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://hcdn.proj-e.com/proje/uploads/works/newbalance-poster.jpg'],
           type: "Web",
           awards: [],
@@ -193,7 +193,7 @@ const config = [
           name: "Kartalyuvasi",
           link: "https://www.kartalyuvasi.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/bjk-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -204,7 +204,7 @@ const config = [
           name: "Korayspor",
           link: "https://www.korayspor.com/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/korayspor-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -215,7 +215,7 @@ const config = [
           name: "Monsternotebook",
           link: "https://www.monsternotebook.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://hcdn.proj-e.com/proje/uploads/works/monster-cover.jpg'],
           type: "Web",
           awards: [],
@@ -226,7 +226,7 @@ const config = [
           name: "Lescon",
           link: "https://www.lescon.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://hcdn.proj-e.com/proje/uploads/works/Lescon.jpg'],
           type: "Web",
           awards: [],
@@ -237,7 +237,7 @@ const config = [
           name: "Unibaby",
           link: "https://www.unibaby.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/unibaby-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -248,7 +248,7 @@ const config = [
           name: "Machka",
           link: "https://www.machka.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/machka-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -259,7 +259,7 @@ const config = [
           name: "İpekyol",
           link: "https://www.ipekyol.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/ipekyol-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -270,7 +270,7 @@ const config = [
           name: "Twist",
           link: "https://www.twist.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: ['https://www.minus99.com/wp-content/uploads/machka-thumbnail.jpg'],
           type: "Web",
           awards: [],
@@ -281,7 +281,7 @@ const config = [
           name: "Ok",
           link: "https://www.ok.com.tr/",
           agency: "proj-e",
-          technologies: ["CMS", "C#", "Razor", "Pure JS"],
+          technologies: ["CMS", "C#", "Razor", "Vanilla JS"],
           media: [],
           type: "Web",
           awards: [],
@@ -514,12 +514,30 @@ const config = [
 
             </span>
 
-            <p class="animated skills-text"> I'm an experienced <mark>JavaScript Developer</mark> and <mark>Frontend Team Leader</mark>. Throughout my career, I've focused on JavaScript, React Native, and modern web technologies, contributing to the success stories of various brands with technical depth and creative solutions.</p>
-
-            <p class="animated skills-text">I've specialized in optimizing user experiences in <mark>e-commerce projects</mark>, particularly in handling API requests and utilizing pure JavaScript and animation techniques. Leading under the <mark>Agile methodology</mark>, I stand out for applying my technical knowledge effectively in practice.</p>
             
-            <p class="animated skills-text">By closely following technological advancements, my goal is to offer innovative solutions in projects and overcome future technical challenges. I'm excited to continue working towards <mark>contributing to similar success stories in the future.</mark></p>
+            <p class="animated skills-text">
+              I am a seasoned professional with <mark>14 years of experience in JavaScript and frontend development</mark>. Throughout my career, I've developed a deep understanding of web development, responsive design, mobile app development, and the e-commerce sector. My areas of expertise include <mark>React</mark> and <mark>React Native technologies</mark>, interactive animations, and third-party integrations. I've refined these skills through hands-on experience and continuous learning.
+            </p>
 
+            <p class="animated skills-text">
+              Over the course of my career, I've contributed to more than 100 e-commerce projects. In these projects, I created innovative features and interactive elements to enhance user experience. I have extensive experience in both web and mobile app development and have developed mobile applications for brands like Cosmetica and Flormar using React Native.
+            </p>
+
+            <p class="animated skills-text">
+              My work philosophy promotes collaboration and creativity. While providing user-centric and innovative solutions, I also dive into the technical aspects of projects to ensure their quality. Additionally, my experience as a <mark>Frontend Team Lead</mark> has equipped me with strong team management and mentoring skills.
+            </p>
+
+            <p class="animated skills-text">
+              Here are some highlights from my career:
+              <br>
+              <br>
+              Achievements: I've earned national and <mark>international awards</mark> for projects with brands like Nike and Vakko. The Nike project, in particular, received "Site of The Day" and Webby Awards, among other prestigious recognitions.
+              <br>
+              Roles and Responsibilities: I have extensive experience in frontend architecture, custom module development, and third-party integrations. For the past three years, I've served as a Frontend Team Lead, guiding and mentoring my team.
+              <br>
+              Looking Ahead: I'm always eager to explore new opportunities and potential collaborations. If you're interested in discussing industry trends, innovation, or new projects, feel free to reach out to me. Let's create something amazing together!
+            </p>
+            
             <p class="animated skills-text">
                 <svg viewBox="0 0 200 200" class="textcircle">
                     <title>Projects &amp; client work 2020</title>

@@ -85,7 +85,7 @@ class LayerManagement {
         const activeSvgFileSrc = svgFileSrc.sections[activeRel];
         const activeBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--${activeRel}-color`);
 
-        console.log(activeBackgroundColor, helper.isLightingColor(activeBackgroundColor), helper.isLightingColor(activeBackgroundColor) ? 'dark' : 'light')
+        //console.log(activeBackgroundColor, helper.isLightingColor(activeBackgroundColor), helper.isLightingColor(activeBackgroundColor) ? 'dark' : 'light')
 
         this.navigation.focused(activeRel);
 
@@ -166,7 +166,8 @@ class LayerManagement {
 
         target.classList.remove(this.cls.deActive);
         target.classList.add(this.cls.isActive);
-
+        
+        this.content.reset();
         this.ID.setAttribute('rel', target.getAttribute('rel') || '');
 
         this.loadStage(activeRel);
