@@ -7,7 +7,8 @@
             "@root": "./src/assets/js",
             "@images": "./src/assets/images",
             "@svg": "./src/assets/svg",
-            "@assets": "./src/assets"
+            "@assets": "./src/assets",
+            "manifest.json": "./manifest.json"
         }
       }]
     ]
